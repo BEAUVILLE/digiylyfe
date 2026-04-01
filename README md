@@ -1,8 +1,8 @@
-# ♾️ DIGIYLYFE — Infrastructure du travail connecté
+# ♾️ DIGIYLYFE — Travailler mieux et se faire trouver
 
 ## 🧭 Vision
 
-DIGIYLYFE est une infrastructure digitale enracinée dans le réel.
+DIGIYLYFE est une présence digitale enracinée dans le réel.
 Son objectif est de **rendre visible, relier et simplifier le monde du travail**.
 
 Ce n’est pas une application.
@@ -29,30 +29,30 @@ DIGIYLYFE propose :
 
 * accès direct entre client et professionnel
 * visibilité immédiate des services
-* outils simples et modulaires
+* outils simples qui aident à agir
 * paiement direct (0% commission)
 
 👉 Voir → Comprendre → Agir
 
 ---
 
-## 🧱 Architecture
+## 🧱 Métiers reliés
 
-DIGIYLYFE est un **écosystème modulaire interconnecté**
+DIGIYLYFE relie plusieurs usages réels dans un même ensemble vivant.
 
-Chaque module représente une fonction du réel :
+Chaque entrée répond à un besoin réel :
 
-* DRIVER → transport
-* RESA → rendez-vous / réservation
-* MARKET → achat / vente
-* BUILD → services / travaux
-* COMMERCE → caisse / vente
-* PAY → lecture financière
-* EXPLORE → découverte du territoire
-* JOBS → missions / emploi
+* Je conduis (DRIVER) → transport
+* Je prends des rendez-vous (RESA) → réservation
+* J’achète et je vends (MARKET) → achat / vente
+* Je propose mes services (BUILD) → services / travaux
+* Mon commerce (COMMERCE) → caisse / vente
+* Voir mon argent (PAY) → lecture financière
+* Je découvre autour de moi (EXPLORE) → territoire
+* Je cherche des missions (JOBS) → emploi
 
-👉 Chaque module est autonome
-👉 Tous les modules sont connectés
+👉 Chaque entrée garde son usage propre
+👉 Toutes les entrées restent reliées
 
 ---
 
@@ -83,8 +83,8 @@ La technologie s’efface, l’usage reste.
 
 ## 🧠 Doctrine DIGIY
 
-* Un seul backend de vérité (subscriptions + slug)
-* Modules indépendants mais reliés
+* Une seule base réelle pour l’accès
+* Des entrées séparées mais reliées
 * Aucun mélange de rails
 * Zéro démo si réel existe
 * Toujours partir du terrain
@@ -96,9 +96,9 @@ La technologie s’efface, l’usage reste.
 
 ### Phase actuelle
 
-* Modules posés (BUILD, RESA, DRIVER, LOC, COMMERCE, EXPLORE, MARKET)
+* Entrées en place (BUILD, RESA, DRIVER, LOC, COMMERCE, EXPLORE, MARKET)
 * Backbone PAY actif
-* Cockpits PRO fonctionnels
+* Espaces métier déjà utilisables
 
 ### Prochaines étapes
 
@@ -141,7 +141,7 @@ La puissance vient de l’interconnexion.
 
 DIGIY PAY n’est pas une banque.
 
-C’est un **cockpit de lecture financière** :
+C’est un espace simple pour lire son argent :
 
 * entrées
 * sorties
@@ -167,7 +167,7 @@ DIGIYLYFE n’est pas une plateforme.
 C’est une **infrastructure vivante**
 qui connecte le travail réel.
 
-Chaque module est une porte.
+Chaque entrée est une porte.
 Chaque utilisateur est un point.
 Chaque connexion renforce le réseau.
 
