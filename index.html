@@ -3,7 +3,853 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>DIGIYLYFE — Travailler mieux et se faire trouver</title>
+  <title>DIGIYLYFE — Travailler mieux e<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>DIGIYLYFE — Infrastructure humaine de l’activité réelle</title>
+  <meta
+    name="description"
+    content="DIGIYLYFE aide les pros du terrain à travailler, vendre, gérer et avancer avec une présence claire, un accès direct et 0% commission sur la mise en relation directe."
+  />
+  <meta name="theme-color" content="#04110d" />
+  <meta name="robots" content="index,follow" />
+
+  <style>
+    :root{
+      --bg:#04110d;
+      --bg2:#063d2a;
+      --card:#0b2a1f;
+      --card2:#103528;
+      --accent:#0f9d58;
+      --accent2:#14b865;
+      --gold:#d4af37;
+      --gold2:#f2d487;
+      --text:#f8fafc;
+      --muted:rgba(248,250,252,.78);
+      --line:rgba(255,255,255,.08);
+      --shadow:0 20px 60px rgba(0,0,0,.28);
+      --radius:24px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+
+    body{
+      font-family: Outfit, Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(20,184,101,.11), transparent 26%),
+        radial-gradient(circle at top right, rgba(212,175,55,.10), transparent 22%),
+        linear-gradient(180deg, #063d2a 0%, #04110d 100%);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    .wrap{
+      width:min(100% - 32px, var(--max));
+      margin:auto;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:40;
+      backdrop-filter:blur(12px);
+      background:rgba(4,17,13,.74);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+
+    .topbar-inner{
+      min-height:74px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-logo{
+      width:46px;
+      height:46px;
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      box-shadow:var(--shadow);
+      flex-shrink:0;
+    }
+
+    .brand-copy{
+      display:flex;
+      flex-direction:column;
+      line-height:1.05;
+    }
+
+    .brand-copy strong{
+      font-size:1rem;
+      color:var(--gold2);
+      letter-spacing:.4px;
+      font-weight:900;
+    }
+
+    .brand-copy span{
+      font-size:.84rem;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:50px;
+      padding:0 18px;
+      border-radius:999px;
+      border:1px solid transparent;
+      font-weight:800;
+      letter-spacing:.2px;
+      transition:.18s ease;
+      cursor:pointer;
+      white-space:nowrap;
+      text-align:center;
+    }
+
+    .btn:hover{transform:translateY(-1px)}
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--gold), #b78b34);
+      color:#111827;
+      box-shadow:0 12px 30px rgba(212,175,55,.24);
+    }
+
+    .btn-green{
+      background:linear-gradient(135deg, var(--accent2), var(--accent));
+      color:white;
+      box-shadow:0 12px 30px rgba(20,184,101,.20);
+    }
+
+    .btn-outline{
+      border-color:rgba(255,255,255,.14);
+      color:var(--text);
+      background:rgba(255,255,255,.02);
+    }
+
+    .hero{
+      padding:74px 0 28px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.12fr .88fr;
+      gap:24px;
+      align-items:stretch;
+    }
+
+    .glass,
+    .card,
+    .formula,
+    .cta-box,
+    .offer-box{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      border-radius:32px;
+    }
+
+    .hero-main{
+      padding:34px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero-main::after{
+      content:"";
+      position:absolute;
+      inset:auto -70px -80px auto;
+      width:240px;
+      height:240px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(212,175,55,.16), transparent 70%);
+      pointer-events:none;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(212,175,55,.10);
+      color:var(--gold2);
+      border:1px solid rgba(212,175,55,.20);
+      font-size:.84rem;
+      font-weight:900;
+      letter-spacing:.35px;
+      text-transform:uppercase;
+    }
+
+    h1,h2,h3{margin:0 0 14px;line-height:1.08}
+
+    h1{
+      margin-top:18px;
+      font-size:clamp(2.35rem, 5vw, 4.5rem);
+      letter-spacing:-.03em;
+      max-width:800px;
+    }
+
+    h2{font-size:clamp(1.55rem, 2.4vw, 2.2rem)}
+
+    .lead{
+      font-size:clamp(1.04rem, 2vw, 1.24rem);
+      color:var(--muted);
+      max-width:760px;
+    }
+
+    .hero-strong{
+      margin-top:18px;
+      font-size:1.08rem;
+      font-weight:900;
+      color:#fff;
+      max-width:800px;
+    }
+
+    .hero-subline{
+      margin-top:14px;
+      color:var(--gold2);
+      font-weight:800;
+      font-size:1rem;
+    }
+
+    .hero-points{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:14px;
+      margin-top:24px;
+    }
+
+    .pill{
+      min-height:102px;
+      padding:16px;
+      border-radius:22px;
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+    }
+
+    .pill b{
+      display:block;
+      margin-bottom:6px;
+      font-size:1rem;
+      color:#fff;
+    }
+
+    .pill span{
+      color:var(--muted);
+      font-size:.94rem;
+    }
+
+    .hero-cta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:26px;
+    }
+
+    .hero-side{
+      padding:24px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      justify-content:space-between;
+    }
+
+    .quote-card,
+    .stat-card,
+    .offer-card{
+      border-radius:24px;
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      padding:20px;
+    }
+
+    .quote-card strong,
+    .offer-card strong{
+      display:block;
+      color:var(--gold2);
+      font-size:1rem;
+      margin-bottom:10px;
+    }
+
+    .quote-card p,
+    .offer-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:.98rem;
+    }
+
+    .stat-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .stat-card .num{
+      display:block;
+      font-size:1.55rem;
+      font-weight:900;
+      color:#fff;
+      line-height:1;
+      margin-bottom:8px;
+    }
+
+    .stat-card .label{
+      display:block;
+      color:var(--muted);
+      font-size:.92rem;
+    }
+
+    section{padding:26px 0}
+
+    .section-head{
+      max-width:850px;
+      margin-bottom:22px;
+    }
+
+    .section-kicker{
+      display:inline-block;
+      margin-bottom:10px;
+      color:var(--gold2);
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:.78rem;
+    }
+
+    .section-head p{
+      margin:0;
+      color:var(--muted);
+      font-size:1.02rem;
+    }
+
+    .section-head .line-strong{
+      margin-top:10px;
+      color:#fff;
+      font-weight:900;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+      gap:18px;
+    }
+
+    .card{padding:24px}
+
+    .icon{
+      width:52px;
+      height:52px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      margin-bottom:14px;
+      font-size:24px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .card h3{font-size:1.16rem;margin-bottom:8px}
+    .card p{color:var(--muted);margin:0}
+
+    .formula{
+      padding:34px;
+      text-align:center;
+      background:
+        radial-gradient(circle at top right, rgba(212,175,55,.12), transparent 26%),
+        linear-gradient(135deg, #0c2e22, #0a1d16);
+    }
+
+    .formula .mini{
+      display:inline-block;
+      margin-bottom:10px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      color:var(--gold2);
+      font-size:.82rem;
+      font-weight:900;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+
+    .formula p{
+      margin:0 auto;
+      max-width:820px;
+      color:var(--muted);
+      font-size:1.06rem;
+    }
+
+    .formula .bigline{
+      margin-top:18px;
+      font-size:clamp(1.08rem, 2.2vw, 1.4rem);
+      font-weight:900;
+      color:#fff;
+    }
+
+    .offer-box{padding:24px}
+
+    .offer-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:16px;
+    }
+
+    .offer-card ul{
+      list-style:none;
+      margin-top:10px;
+      display:grid;
+      gap:8px;
+      color:var(--muted);
+      padding:0;
+    }
+
+    .offer-card li::before{
+      content:"• ";
+      color:var(--gold2);
+      font-weight:900;
+    }
+
+    .cta{padding:12px 0 84px}
+
+    .cta-box{
+      padding:24px;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .cta-main,
+    .cta-side{
+      border-radius:24px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      padding:22px;
+    }
+
+    .cta-main p,
+    .cta-side p{color:var(--muted);margin:0}
+
+    .cta-buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:20px;
+    }
+
+    .mini-badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:16px;
+    }
+
+    .mini-badge{
+      padding:10px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      color:#fff;
+      font-size:.92rem;
+      font-weight:700;
+    }
+
+    footer{
+      padding:26px 0 44px;
+      text-align:center;
+      color:rgba(248,250,252,.62);
+      font-size:.92rem;
+    }
+
+    @media (max-width: 980px){
+      .hero-grid,
+      .cta-box,
+      .offer-grid{grid-template-columns:1fr}
+
+      .hero-points,
+      .stat-grid{grid-template-columns:1fr}
+
+      .topbar-inner{
+        min-height:auto;
+        padding:12px 0;
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .nav-actions{width:100%}
+      .nav-actions .btn{flex:1 1 auto}
+    }
+
+    @media (max-width: 640px){
+      .hero{padding-top:46px}
+
+      .glass,
+      .card,
+      .formula,
+      .cta-box,
+      .cta-main,
+      .cta-side,
+      .offer-box{
+        padding:18px;
+        border-radius:22px;
+      }
+
+      h1{font-size:2.2rem}
+      .btn{width:100%}
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="https://digiylyfe.com/">
+        <div class="brand-logo">
+          <img src="https://digiylyfe.net/wp-content/uploads/2026/03/digiylyfe_logo_qr.jpeg" alt="Logo DIGIYLYFE" />
+        </div>
+        <div class="brand-copy">
+          <strong>DIGIYLYFE</strong>
+          <span>Un sol digital pour travailler debout</span>
+        </div>
+      </a>
+
+      <div class="nav-actions">
+        <a class="btn btn-outline" href="https://digiylyfe.com/">Retour accueil</a>
+        <a class="btn btn-primary" href="https://commencer-a-payer.digiylyfe.com/">Activer mon accès</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-main glass">
+          <div class="eyebrow">DIGIYLYFE • infrastructure humaine de l’activité réelle</div>
+
+          <h1>DIGIYLYFE n’est pas un simple service.<br>C’est un sol digital pour les pros du terrain.</h1>
+
+          <p class="lead">
+            DIGIYLYFE aide les professionnels du terrain à travailler, vendre, gérer, recevoir et avancer
+            avec une présence claire, un accès direct et des outils utiles au quotidien.
+          </p>
+
+          <div class="hero-strong">
+            Là où d’autres bâtissent l’infrastructure de l’intelligence,
+            DIGIYLYFE bâtit l’infrastructure humaine de l’activité réelle.
+          </div>
+
+          <div class="hero-subline">
+            Pas une plateforme qui confisque. Pas un décor technologique. Un appui clair pour garder la main.
+          </div>
+
+          <div class="hero-points">
+            <div class="pill">
+              <b>Être trouvé</b>
+              <span>Une présence claire pour sortir de l’anonymat et être contacté plus facilement.</span>
+            </div>
+            <div class="pill">
+              <b>Mieux travailler</b>
+              <span>Des outils simples pour mieux organiser ses trajets, ses réservations, ses ventes ou ses services.</span>
+            </div>
+            <div class="pill">
+              <b>Garder la main</b>
+              <span>0% commission sur la mise en relation directe, accès simple et contact direct avec le client.</span>
+            </div>
+          </div>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="https://commencer-a-payer.digiylyfe.com/">Activer mon accès</a>
+            <a class="btn btn-green" href="#offre-pro">Je suis un pro du terrain</a>
+            <a class="btn btn-outline" href="#vision">Comprendre la vision</a>
+          </div>
+        </div>
+
+        <aside class="hero-side glass">
+          <div class="quote-card">
+            <strong>La phrase fondatrice</strong>
+            <p>
+              DIGIYLYFE n’est pas un site de plus. DIGIYLYFE est un socle.
+              Une base simple, directe et humaine pour faire tenir l’activité réelle.
+            </p>
+          </div>
+
+          <div class="stat-grid">
+            <div class="stat-card">
+              <span class="num">0%</span>
+              <span class="label">commission sur la mise en relation directe</span>
+            </div>
+            <div class="stat-card">
+              <span class="num">1</span>
+              <span class="label">téléphone qui devient outil de travail</span>
+            </div>
+            <div class="stat-card">
+              <span class="num">Direct</span>
+              <span class="label">contact simple avec le client</span>
+            </div>
+            <div class="stat-card">
+              <span class="num">∞</span>
+              <span class="label">cap long pour un réseau vivant enraciné dans le réel</span>
+            </div>
+          </div>
+
+          <div class="offer-card">
+            <strong>Pour qui</strong>
+            <p>
+              Chauffeur, loueur, commerçant, artisan, restaurateur, recruteur, vendeur, porteur de lieu.
+              DIGIYLYFE donne un appui digital clair à ceux qui travaillent déjà pour de vrai.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="vision">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-kicker">Vision</div>
+          <h2>Le monde du travail existe déjà. DIGIYLYFE le rend visible, lisible et actionnable.</h2>
+          <p>
+            Notre ambition n’est pas d’ajouter une couche de bruit. Notre ambition est de donner aux pros du terrain
+            une base claire pour exister en ligne, être compris vite, être contactés directement et mieux tenir leur activité.
+          </p>
+          <p class="line-strong">
+            La façade parle humain. Le moteur travaille en silence. Chaque brique doit aider à garder la main.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="icon">🌍</div>
+            <h3>Présence claire</h3>
+            <p>
+              Une activité réelle doit pouvoir être vue, comprise et contactée sans confusion ni perte de temps.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🧭</div>
+            <h3>Lecture simple</h3>
+            <p>
+              Qui tu es, ce que tu fais, où tu es, comment te joindre : l’essentiel doit apparaître vite, surtout sur téléphone.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">⚡</div>
+            <h3>Action directe</h3>
+            <p>
+              Appeler, écrire, réserver, commander, encaisser, répondre, avancer. Le digital doit débloquer l’action, pas la ralentir.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="ecosysteme">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-kicker">Solutions métier</div>
+          <h2>Chaque métier a besoin d’un appui clair</h2>
+          <p>
+            DIGIYLYFE ne parle pas d’abord en jargon. DIGIYLYFE part des gestes réels du pro : conduire, louer, encaisser,
+            réserver, vendre, proposer ses services, chercher du travail, voir son argent, faire découvrir un lieu.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="icon">🚗</div>
+            <h3>Je conduis</h3>
+            <p>Prendre une course, montrer ses tarifs, rester joignable et mieux tenir ses trajets.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🏠</div>
+            <h3>Je loue</h3>
+            <p>Montrer son lieu, bloquer ses dates, recevoir des demandes et garder la main sur ses réservations.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🏪</div>
+            <h3>Mon commerce</h3>
+            <p>Encaisser vite, vendre clair, suivre son activité du jour et garder un outil simple dans la poche.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">📅</div>
+            <h3>Je réserve</h3>
+            <p>Laisser le client choisir un moment, mieux organiser ses disponibilités et éviter les pertes de temps.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🧰</div>
+            <h3>Je propose mes services</h3>
+            <p>Présenter son savoir-faire, être visible, recevoir des demandes et inspirer confiance plus vite.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🛒</div>
+            <h3>Je vends</h3>
+            <p>Montrer ses produits, recevoir des commandes et relier offre locale et client sans détour inutile.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">💼</div>
+            <h3>Je cherche du travail</h3>
+            <p>Rendre son profil visible, prêt à bouger, prêt à être contacté et mieux relié aux opportunités.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">💸</div>
+            <h3>Mon argent</h3>
+            <p>Voir ce qui entre, ce qui sort et ce qu’il reste vraiment pour piloter sans se mentir.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="formula">
+          <div class="mini">La doctrine DIGIY</div>
+          <h2>Sobre devant. Redoutable derrière.</h2>
+          <p>
+            DIGIYLYFE parle humain en façade et tient solide en profondeur. Nous refusons le bruit, le jargon et la complication inutile.
+            Nous voulons une technologie qui aide sans écraser, qui clarifie sans confisquer, et qui soutient le pro au lieu de le perdre.
+          </p>
+          <div class="bigline">
+            Un appui humain. Un accès direct. Une présence qui travaille pour de vrai.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="offre-pro">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-kicker">Offre pro</div>
+          <h2>Une offre simple pour entrer dans DIGIYLYFE</h2>
+          <p>
+            Tu es déjà sur le terrain. DIGIYLYFE ne te demande pas de devenir technicien.
+            On te donne une présence claire, un accès simple et des outils pour mieux avancer.
+          </p>
+        </div>
+
+        <div class="offer-box">
+          <div class="offer-grid">
+            <article class="offer-card">
+              <strong>Ce que tu gagnes</strong>
+              <ul>
+                <li>Une présence digitale claire et crédible</li>
+                <li>Un accès simple à ton espace</li>
+                <li>Des outils utiles selon ton métier</li>
+                <li>Un contact direct avec tes clients</li>
+              </ul>
+            </article>
+
+            <article class="offer-card">
+              <strong>Ce qu’on défend</strong>
+              <ul>
+                <li>0% commission sur la mise en relation directe</li>
+                <li>Le pro reste au centre</li>
+                <li>Un usage pensé pour le téléphone</li>
+                <li>Une logique enracinée dans le terrain</li>
+              </ul>
+            </article>
+
+            <article class="offer-card">
+              <strong>Comment entrer</strong>
+              <ul>
+                <li>Tu choisis ton activité</li>
+                <li>Tu actives ton accès</li>
+                <li>Tu ouvres ton espace</li>
+                <li>Tu commences à être vu et à travailler plus clair</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="wrap">
+        <div class="cta-box">
+          <div class="cta-main">
+            <h2>Je suis pro du terrain. Je veux entrer dans DIGIYLYFE.</h2>
+            <p>
+              Active ton accès, ouvre ton espace et commence avec une base simple pour te rendre visible,
+              mieux t’organiser et être contacté plus directement.
+            </p>
+
+            <div class="mini-badges">
+              <span class="mini-badge">0% commission directe</span>
+              <span class="mini-badge">Accès simple</span>
+              <span class="mini-badge">Pensé mobile</span>
+              <span class="mini-badge">Contact direct</span>
+            </div>
+
+            <div class="cta-buttons">
+              <a class="btn btn-primary" href="https://commencer-a-payer.digiylyfe.com/">Activer mon accès maintenant</a>
+              <a class="btn btn-green" href="https://wa.me/221771342889">Parler au support</a>
+              <a class="btn btn-outline" href="https://digiylyfe.com/">Retour accueil</a>
+            </div>
+          </div>
+
+          <div class="cta-side">
+            <h3>Ce que DIGIYLYFE veut devenir</h3>
+            <p>
+              Pas un simple site. Pas une vitrine vide.
+              Une infrastructure humaine de l’activité réelle,
+              bâtie pour que les pros du terrain puissent travailler, vendre, gérer et avancer sans se perdre.
+            </p>
+            <p style="margin-top:12px;">
+              DIGIYLYFE n’est pas un décor. C’est un sol.
+              Et sur ce sol, chacun doit pouvoir bâtir debout.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      DIGIYLYFE ♾️ — Un sol digital pour travailler, vendre, gérer et avancer sans se perdre.
+    </div>
+  </footer>
+
+</body>
+</html>
+t se faire trouver</title>
   <meta
     name="description"
     content="DIGIYLYFE aide les professionnels du terrain à mieux travailler, se faire trouver et être contactés simplement. 0% commission, accès direct, présence claire."
