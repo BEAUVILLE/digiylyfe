@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="DIGIYLYFE — Uber garde le client. DIGIY l'amène chez le professionnel. Diaporama dynamique en boucle.">
-<title>DIGIYLYFE — Diaporama dynamique</title>
+<title>DIGIYLYFE — Diaporama audio synchronisé</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -52,11 +52,11 @@ body{padding-bottom:calc(82px + env(safe-area-inset-bottom,0px))}
 .slide::before{content:'';position:absolute;inset:-30px;z-index:0;pointer-events:none;background:var(--slide-bg,#050d08) center/cover no-repeat;filter:blur(26px) saturate(1.08);opacity:.54;transform:scale(1.08)}
 .slide::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at 50% 40%,transparent 35%,rgba(0,0,0,.48) 100%),linear-gradient(to bottom,rgba(0,0,0,.22) 0%,transparent 30%,transparent 55%,rgba(0,0,0,.8) 100%)}
 .slide img{position:absolute;left:50%;top:45%;z-index:1;transform:translate(-50%,-50%) scale(.92);width:96%;height:76%;object-fit:contain;object-position:center center;display:block;will-change:transform;backface-visibility:hidden}
-.slide.active img{animation:digiyFarMobile 8s ease-in-out forwards}
+.slide.active img{animation:digiyFarMobile 6.2s ease-in-out forwards}
 @keyframes digiyFarMobile{0%{transform:translate(-50%,-50%) scale(.90)}100%{transform:translate(-50%,-50.2%) scale(.97)}}
 @media(min-width:600px){
   .slide img{top:50%;width:96%;height:86%;transform:translate(-50%,-50%) scale(1)}
-  .slide.active img{animation:digiyFarDesktop 8s ease-in-out forwards}
+  .slide.active img{animation:digiyFarDesktop 6.2s ease-in-out forwards}
   @keyframes digiyFarDesktop{0%{transform:translate(-50%,-50%) scale(.98)}100%{transform:translate(-50.25%,-50.2%) scale(1.04)}}
 }
 
@@ -399,7 +399,7 @@ IMAGE_URLS.forEach(src => { const i = new Image(); i.src = src; });
   const slides=[...document.querySelectorAll('.slide')];
   const bar=document.getElementById('sp');
   const dotsWrap=document.getElementById('dots');
-  const DUR=8000;
+  let DUR=6200; // 10 photos ≈ 62s : toutes les images passent avant la fin de la voix
   let cur=0, timer=null, running=false;
 
   slides.forEach((_,i)=>{
@@ -417,6 +417,13 @@ IMAGE_URLS.forEach(src => { const i = new Image(); i.src = src; });
     if(!bar) return;
     bar.style.transition='none';
     bar.style.width='0%';
+  }
+
+  function setDuration(ms){
+    const n=Number(ms || 0);
+    if(Number.isFinite(n) && n >= 4500 && n <= 9000){
+      DUR=n;
+    }
   }
 
   function goTo(i, animate=true){
@@ -461,7 +468,8 @@ IMAGE_URLS.forEach(src => { const i = new Image(); i.src = src; });
     setProgressIdle();
   }
 
-  function resetAndStart(){
+  function resetAndStart(durationMs){
+    if(durationMs) setDuration(durationMs);
     clearInterval(timer);
     running=false;
     goTo(0,false);
@@ -484,6 +492,7 @@ IMAGE_URLS.forEach(src => { const i = new Image(); i.src = src; });
     pause:pauseLoop,
     stop:stopLoop,
     resetAndStart,
+    setDuration,
     isRunning:()=>running
   };
 
@@ -493,6 +502,11 @@ IMAGE_URLS.forEach(src => { const i = new Image(); i.src = src; });
 let utter=null, rate=0.86, paused=false, pInt=null;
 const TEXT=`Uber avance maintenant vers les réservations d'hôtel. Après les trajets. Après les repas. Voici le voyage. Le monde va vers des écosystèmes. Mais une question devient centrale : qui possède la relation avec le client ? Uber veut que le client reste dans Uber. DIGIYLYFE veut que le client arrive chez le professionnel. Ce sont deux philosophies opposées. Dans une super-app de plateforme, le pro devient une ressource dans une grande machine. Dans un super-écosystème local, le pro garde son nom, son lien, son QR, son client, et son argent. DIGIYLYFE, c'est zéro commission, paiement direct, présence digitale simple, outils métier, et visibilité locale. DIGIY ne remplace pas le professionnel. DIGIY l'équipe. Le futur peut capturer le terrain. Ou aider le terrain à reprendre la main. DIGIYLYFE choisit le deuxième chemin. Ancré en Afrique. Ouvert au monde.`;
 
+function getVisionSlideDuration(){
+  // La synthèse vocale réelle varie selon les téléphones.
+  // 6,2s par image garantit que les 10 visuels apparaissent avant la fin du texte.
+  return 6200;
+}
 
 function startVisionExperience(){
   const overlay=document.getElementById('visionStart');
@@ -506,7 +520,7 @@ function startVisionExperience(){
   }
 
   if(window.DIGIY_SLIDESHOW && typeof window.DIGIY_SLIDESHOW.resetAndStart === 'function'){
-    window.DIGIY_SLIDESHOW.resetAndStart();
+    window.DIGIY_SLIDESHOW.resetAndStart(getVisionSlideDuration());
   }
 
   digiyPlay();
@@ -519,6 +533,9 @@ function startVisionExperience(){
 function digiyPlay(){
   if(!('speechSynthesis' in window)){ setStatus('⚠️ Non disponible.'); return; }
   window.speechSynthesis.cancel(); clearInterval(pInt);
+  if(window.DIGIY_SLIDESHOW && typeof window.DIGIY_SLIDESHOW.setDuration === 'function'){
+    window.DIGIY_SLIDESHOW.setDuration(getVisionSlideDuration());
+  }
   if(window.DIGIY_SLIDESHOW && typeof window.DIGIY_SLIDESHOW.start === 'function' && !window.DIGIY_SLIDESHOW.isRunning()){
     window.DIGIY_SLIDESHOW.start();
   }
