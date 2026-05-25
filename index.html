@@ -500,6 +500,13 @@ IMAGE_URLS.forEach(src => { const i = new Image(); i.src = src; });
 })();
 
 let utter=null, rate=0.86, paused=false, pInt=null;
+function digiySpeakText(text){
+  return String(text || "")
+    .replace(/\bWave\b/g, "Wéïv")
+    .replace(/\bWhatsApp\b/g, "Ouatsap")
+    .replace(/\bDIGIYLYFE\b/g, "Di-ji-laïf");
+}
+
 const TEXT=`Uber avance maintenant vers les réservations d'hôtel. Après les trajets. Après les repas. Voici le voyage. Le monde va vers des écosystèmes. Mais une question devient centrale : qui possède la relation avec le client ? Uber veut que le client reste dans Uber. DIGIYLYFE veut que le client arrive chez le professionnel. Ce sont deux philosophies opposées. Dans une super-app de plateforme, le pro devient une ressource dans une grande machine. Dans un super-écosystème local, le pro garde son nom, son lien, son QR, son client et son argent. DIGIYLYFE centralise les routes business autour du professionnel, sans placer une plateforme prédatrice entre lui et son client. Le pro a sa fiche, son QR, son lien, son WhatsApp, son paiement direct, son module métier, son planning, sa caisse, ses annonces, son accès protégé, sa visibilité et son réseau. Et au milieu, personne ne vient dire : passe par moi, donne-moi ton client, donne-moi ta commission, donne-moi ton argent. DIGIYLYFE ne remplace pas le professionnel. DIGIYLYFE lui rend les routes du business. Là où beaucoup de plateformes organisent la capture, DIGIYLYFE organise la restitution. Le centre n'est pas l'algorithme, ni la plateforme, ni l'investisseur. Le centre, c'est le professionnel réel. DIGIYLYFE, c'est zéro commission, paiement direct, présence digitale simple, outils métier et visibilité locale. Le futur peut capturer le terrain. Ou aider le terrain à reprendre la main. DIGIYLYFE choisit le deuxième chemin. Ancré en Afrique. Ouvert au monde.`;
 
 function getVisionSlideDuration(){
@@ -539,7 +546,7 @@ function digiyPlay(){
   if(window.DIGIY_SLIDESHOW && typeof window.DIGIY_SLIDESHOW.start === 'function' && !window.DIGIY_SLIDESHOW.isRunning()){
     window.DIGIY_SLIDESHOW.start();
   }
-  utter=new SpeechSynthesisUtterance(TEXT);
+  utter=new SpeechSynthesisUtterance(digiySpeakText(TEXT));
   utter.lang='fr-FR'; utter.rate=rate; utter.pitch=1; utter.volume=1;
   const voices=window.speechSynthesis.getVoices();
   const frV=voices.find(v=>v.lang&&v.lang.toLowerCase().startsWith('fr'));
