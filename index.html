@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="DIGIYLYFE — Uber garde le client. DIGIY l'amène chez le professionnel. Diaporama dynamique en boucle.">
-<title>DIGIYLYFE — Diaporama audio synchronisé</title>
+<meta name="description" content="DIGIYLYFE — Les grandes plateformes gardent le client. DIGIY l'amène chez le professionnel. Diaporama dynamique en boucle.">
+<title>DIGIYLYFE — Les grandes plateformes gardent le client. DIGIY l'amène chez le professionnel.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -222,7 +222,7 @@ body{padding-bottom:calc(82px + env(safe-area-inset-bottom,0px))}
     <a class="nav-btn" href="https://digiylyfe.com/">🌍 Site</a>
     <a class="nav-btn" href="https://digiy-hub.digiylyfe.com/">🧭 HUB</a>
     <a class="nav-btn" href="https://tarifs.digiylyfe.com/" target="_blank" rel="noopener noreferrer">📦 Tarifs</a>
-    <a class="nav-btn gold" href="https://digiylyfe.net/uber-veut-garder-le-client-dans-son-application-digiy-veut-lamener-chez-le-professionnel/" target="_blank" rel="noopener">📖 Article</a>
+    <a class="nav-btn gold" href="https://digiylyfe.net/uber-veut-garder-le-client-dans-son-application-digiy-veut-lamener-chez-le-professionnel/" target="_blank" rel="noopener">📖 Article complet</a>
   </nav>
 </header>
 
@@ -240,7 +240,7 @@ body{padding-bottom:calc(82px + env(safe-area-inset-bottom,0px))}
 
   <div class="slide active">
     <img src="https://digiylyfe.net/wp-content/uploads/2026/04/ChatGPT-Image-30-avr.-2026-15_19_48.png" alt="DIGIYLYFE vision 1">
-    <div class="slide-caption"><h2>Uber garde le client. <em>DIGIY l'amène chez le pro.</em></h2><p>Deux philosophies opposées : capturer le parcours ou rendre le terrain visible.</p></div>
+    <div class="slide-caption"><h2>Les grandes plateformes gardent le client. <em>DIGIY l'amène chez le pro.</em></h2><p>Deux philosophies opposées : capturer le parcours ou rendre le terrain visible.</p></div>
   </div>
   <div class="slide">
     <img src="https://digiylyfe.net/wp-content/uploads/2026/04/ChatGPT-Image-27-avr.-2026-18_05_48.png" alt="DIGIYLYFE vision 2">
@@ -286,7 +286,7 @@ body{padding-bottom:calc(82px + env(safe-area-inset-bottom,0px))}
 
 <main class="wrap">
   <div class="meta"><span class="badge">Vision DIGIYLYFE</span><span class="meta-sep">•</span><span class="meta-date">Article à écouter et à faire circuler</span></div>
-  <h1 class="article-title">Uber veut garder le client dans son application. <em>DIGIY veut l'amener chez le professionnel.</em></h1>
+  <h1 class="article-title">Les grandes plateformes veulent garder le client. <em>DIGIY veut l'amener chez le professionnel.</em></h1>
   <p class="article-sub">Le monde va vers des écosystèmes. La vraie question n'est plus seulement “quelle application va tout faire ?” mais “qui possède la relation avec le client ?”.</p>
 
   <div class="audio-box">
@@ -311,11 +311,11 @@ body{padding-bottom:calc(82px + env(safe-area-inset-bottom,0px))}
   <div class="rule"></div>
 
   <div class="body">
-    <p>Après les trajets en voiture et la livraison de repas, Uber avance désormais vers les réservations d'hôtel. Ce mouvement n'est pas anodin. Il montre une chose simple : le futur des grandes applications n'est plus limité à un seul service.</p>
+    <p>Les grandes plateformes avancent désormais vers chaque geste du quotidien : trajets, repas, hôtels, courses. Ce mouvement n'est pas anodin. Il montre une chose simple : le futur des grandes applications n'est plus limité à un seul service.</p>
     <p class="hl">Le monde va vers des écosystèmes.</p>
     <p>Se déplacer, manger, dormir, réserver, payer, découvrir, acheter : les grandes plateformes veulent relier tous ces gestes du quotidien dans une seule application. Elles ne vendent plus seulement un service. Elles cherchent à organiser tout un parcours de vie.</p>
     <p class="hl">Qui possède la relation avec le client ?</p>
-    <p class="li">Uber veut que le client reste dans Uber.</p>
+    <p class="li">Les grandes plateformes veulent que le client reste dans leur application.</p>
     <p class="li">DIGIY veut que le client arrive chez le professionnel.</p>
     <p>Dans une super-app de plateforme, le professionnel risque de devenir une ressource dans une grande machine. Dans un super-écosystème local, le professionnel garde son nom, son lien, son QR, son client et son argent.</p>
     <p class="hl">0% commission. Paiement direct. Présence digitale simple.</p>
@@ -406,7 +406,7 @@ IMAGE_URLS.forEach(src => { const i = new Image(); i.src = src; });
     const d=document.createElement('button');
     d.className='dot'+(i===0?' active':'');
     d.dataset.i=i;
-    d.setAttribute('aria-label','Aller à l’image '+(i+1));
+    d.setAttribute('aria-label', "Aller à l'image " + (i + 1));
     d.addEventListener('click',()=>{goTo(i); startLoop();});
     dotsWrap.appendChild(d);
   });
@@ -504,10 +504,11 @@ function digiySpeakText(text){
   return String(text || "")
     .replace(/\bWave\b/g, "Wéïv")
     .replace(/\bWhatsApp\b/g, "Ouatsap")
-    .replace(/\bDIGIYLYFE\b/g, "Di-ji-laïf");
+    .replace(/\bDIGIYLYFE\b/g, "Di-ji-laïf")
+    .replace(/\bplateformes\b/g, "platt-formes");
 }
 
-const TEXT=`Uber avance maintenant vers les réservations d'hôtel. Après les trajets. Après les repas. Voici le voyage. Le monde va vers des écosystèmes. Mais une question devient centrale : qui possède la relation avec le client ? Uber veut que le client reste dans Uber. DIGIYLYFE veut que le client arrive chez le professionnel. Ce sont deux philosophies opposées. Dans une super-app de plateforme, le pro devient une ressource dans une grande machine. Dans un super-écosystème local, le pro garde son nom, son lien, son QR, son client et son argent. DIGIYLYFE centralise les routes business autour du professionnel, sans placer une plateforme prédatrice entre lui et son client. Le pro a sa fiche, son QR, son lien, son WhatsApp, son paiement direct, son module métier, son planning, sa caisse, ses annonces, son accès protégé, sa visibilité et son réseau. Et au milieu, personne ne vient dire : passe par moi, donne-moi ton client, donne-moi ta commission, donne-moi ton argent. DIGIYLYFE ne remplace pas le professionnel. DIGIYLYFE lui rend les routes du business. Là où beaucoup de plateformes organisent la capture, DIGIYLYFE organise la restitution. Le centre n'est pas l'algorithme, ni la plateforme, ni l'investisseur. Le centre, c'est le professionnel réel. DIGIYLYFE, c'est zéro commission, paiement direct, présence digitale simple, outils métier et visibilité locale. Le futur peut capturer le terrain. Ou aider le terrain à reprendre la main. DIGIYLYFE choisit le deuxième chemin. Ancré en Afrique. Ouvert au monde.`;
+const TEXT=`Les grandes plateformes avancent vers chaque geste du quotidien. Les trajets. Les repas. Les hôtels. Les courses. Le monde va vers des écosystèmes. Mais une question devient centrale : qui possède la relation avec le client ? Les grandes plateformes veulent que le client reste dans leur application. DIGIYLYFE veut que le client arrive chez le professionnel. Ce sont deux philosophies opposées. Dans une super-app de plateforme, le pro devient une ressource dans une grande machine. Dans un super-écosystème local, le pro garde son nom, son lien, son QR, son client et son argent. DIGIYLYFE centralise les routes business autour du professionnel, sans placer une plateforme prédatrice entre lui et son client. Le pro a sa fiche, son QR, son lien, son WhatsApp, son paiement direct, son module métier, son planning, sa caisse, ses annonces, son accès protégé, sa visibilité et son réseau. Et au milieu, personne ne vient dire : passe par moi, donne-moi ton client, donne-moi ta commission, donne-moi ton argent. DIGIYLYFE ne remplace pas le professionnel. DIGIYLYFE lui rend les routes du business. Là où beaucoup de plateformes organisent la capture, DIGIYLYFE organise la restitution. Le centre n'est pas l'algorithme, ni la plateforme, ni l'investisseur. Le centre, c'est le professionnel réel. DIGIYLYFE, c'est zéro commission, paiement direct, présence digitale simple, outils métier et visibilité locale. Le futur peut capturer le terrain. Ou aider le terrain à reprendre la main. DIGIYLYFE choisit le deuxième chemin. Ancré en Afrique. Ouvert au monde.`;
 
 function getVisionSlideDuration(){
   // La synthèse vocale réelle varie selon les téléphones.
@@ -619,3 +620,4 @@ document.addEventListener('DOMContentLoaded',()=>{
 </script>
 </body>
 </html>
+
