@@ -6,7 +6,7 @@
 <meta name="description" content="DIGIYLYFE — Vision immersive : image plein écran et lecteur audio.">
 <title>DIGIYLYFE — Vision immersive</title>
 <meta name="theme-color" content="#060e07">
-<meta name="digiy-build" content="vision-immersive-image-audio-only-20260526">
+<meta name="digiy-build" content="vision-immersive-image-audio-only-wakelock-20260526">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -412,6 +412,39 @@ document.querySelectorAll('.slide').forEach(slide => {
 })();
 
 let utter=null, rate=0.86, paused=false, pInt=null, fabOpen=false;
+let digiyWakeLock=null;
+
+async function digiyKeepScreenAwake(){
+  try{
+    if('wakeLock' in navigator && !digiyWakeLock){
+      digiyWakeLock = await navigator.wakeLock.request('screen');
+      if(digiyWakeLock && digiyWakeLock.addEventListener){
+        digiyWakeLock.addEventListener('release',()=>{ digiyWakeLock=null; });
+      }
+    }
+  }catch(e){
+    digiyWakeLock=null;
+  }
+}
+
+async function digiyReleaseWakeLock(){
+  try{
+    if(digiyWakeLock){
+      const lock=digiyWakeLock;
+      digiyWakeLock=null;
+      await lock.release();
+    }
+  }catch(e){
+    digiyWakeLock=null;
+  }
+}
+
+document.addEventListener('visibilitychange',()=>{
+  if(document.visibilityState==='visible' && window.speechSynthesis && window.speechSynthesis.speaking && !paused){
+    digiyKeepScreenAwake();
+  }
+});
+
 
 function digiySpeakText(text){
   return String(text || "")
@@ -430,14 +463,15 @@ function digiyPlay(){
   try{ window.DIGIY_SLIDES?.goTo(0); window.DIGIY_SLIDES?.restart(); }catch(e){}
   window.speechSynthesis.cancel();
   clearInterval(pInt);
+  digiyKeepScreenAwake();
   utter=new SpeechSynthesisUtterance(digiySpeakText(TEXT));
   utter.lang='fr-FR'; utter.rate=rate; utter.pitch=1; utter.volume=1;
   const voices=window.speechSynthesis.getVoices();
   const frV=voices.find(v=>v.lang&&v.lang.toLowerCase().startsWith('fr'));
   if(frV) utter.voice=frV;
   utter.onstart =()=>{ setStatus('▶ Vision en cours…'); startProg(); setFabState('play'); };
-  utter.onend   =()=>{ setStatus('✓ Vision terminée'); setProgress(100); clearInterval(pInt); paused=false; setFabState('stop'); };
-  utter.onerror =()=>{ setStatus('⚠️ Erreur audio. Relance ÉCOUTE.'); setFabState('stop'); };
+  utter.onend   =()=>{ digiyReleaseWakeLock(); setStatus('✓ Vision terminée'); setProgress(100); clearInterval(pInt); paused=false; setFabState('stop'); };
+  utter.onerror =()=>{ digiyReleaseWakeLock(); setStatus('⚠️ Erreur audio. Relance ÉCOUTE.'); setFabState('stop'); };
   utter.onpause =()=> setStatus('⏸ Vision en pause');
   utter.onresume=()=> setStatus('▶ Reprise…');
   paused=false;
@@ -449,6 +483,7 @@ function digiyPause(){
   if(paused){
     window.speechSynthesis.resume();
     paused=false;
+    digiyKeepScreenAwake();
     startProg();
     setStatus('▶ Reprise…');
     setElText('fabPauseBtn','⏸');
@@ -456,6 +491,7 @@ function digiyPause(){
   }else{
     window.speechSynthesis.pause();
     paused=true;
+    digiyReleaseWakeLock();
     clearInterval(pInt);
     setStatus('⏸ Vision en pause');
     setElText('fabPauseBtn','▶');
@@ -465,6 +501,7 @@ function digiyPause(){
 
 function digiyStop(){
   if('speechSynthesis' in window) window.speechSynthesis.cancel();
+  digiyReleaseWakeLock();
   clearInterval(pInt);
   setProgress(0);
   paused=false;
@@ -526,4 +563,6 @@ if(window.speechSynthesis){
 </script>
 </body>
 </html>
+
+>
 
