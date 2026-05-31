@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="DIGIY BUSINESS — L’accélérateur des pistes du village, vision immersive et lecteur audio.">
-<title>DIGIY BUSINESS — L’accélérateur des pistes du village</title>
+<meta name="description" content="DIGIY BUSINESS — L'accélérateur des pistes du village, vision immersive et lecteur audio.">
+<title>DIGIY BUSINESS — L'accélérateur des pistes du village</title>
 <meta name="theme-color" content="#060e07">
-<meta name="digiy-build" content="digiy-business-vision-audio-slides-20260531">
+<meta name="digiy-build" content="digiy-business-audio-sync-slides-29blocs-20260531">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -21,71 +21,29 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{width:100%;height:100%;overflow:hidden;background:#000;color:var(--cream);font-family:var(--sans)}
 body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  opacity:.14;
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.14;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
 }
-
-.slideshow{
-  position:fixed;
-  inset:0;
-  z-index:1;
-  width:100vw;
-  height:100svh;
-  height:100dvh;
-  overflow:hidden;
-  background:#000;
-}
-.slide{
-  position:absolute;
-  inset:0;
-  opacity:0;
-  transition:opacity .95s ease;
-  background:#050d08;
-  overflow:hidden;
-}
+.slideshow{position:fixed;inset:0;z-index:1;width:100vw;height:100svh;height:100dvh;overflow:hidden;background:#000;}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .95s ease;background:#050d08;overflow:hidden;}
 .slide.active{opacity:1;z-index:2}
 .slide::before{
-  content:"";
-  position:absolute;
-  inset:-36px;
-  z-index:0;
-  pointer-events:none;
+  content:"";position:absolute;inset:-36px;z-index:0;pointer-events:none;
   background:var(--slide-bg,#050d08) center/cover no-repeat;
-  filter:blur(28px) saturate(1.08);
-  opacity:.58;
-  transform:scale(1.1);
+  filter:blur(28px) saturate(1.08);opacity:.58;transform:scale(1.1);
 }
 .slide::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:2;
-  pointer-events:none;
-  background:
-    radial-gradient(ellipse at 50% 45%, transparent 34%, rgba(0,0,0,.40) 100%),
-    linear-gradient(to bottom, rgba(0,0,0,.20) 0%, transparent 24%, transparent 70%, rgba(0,0,0,.48) 100%);
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 45%,transparent 34%,rgba(0,0,0,.40) 100%),
+    linear-gradient(to bottom,rgba(0,0,0,.20) 0%,transparent 24%,transparent 70%,rgba(0,0,0,.48) 100%);
 }
 .slide img{
-  position:absolute;
-  left:50%;
-  top:50%;
-  z-index:1;
-  width:96vw;
-  height:92svh;
-  height:92dvh;
-  object-fit:contain;
-  object-position:center center;
-  display:block;
+  position:absolute;left:50%;top:50%;z-index:1;
+  width:96vw;height:92svh;height:92dvh;
+  object-fit:contain;object-position:center center;display:block;
   transform:translate3d(-50%,-50%,0) scale(.96);
-  transform-origin:center center;
-  will-change:transform, opacity;
-  backface-visibility:hidden;
-  -webkit-backface-visibility:hidden;
+  transform-origin:center center;will-change:transform,opacity;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
   filter:drop-shadow(0 22px 42px rgba(0,0,0,.36));
 }
 .slide.active img{animation:visionFloatMobile 8s linear forwards}
@@ -102,118 +60,87 @@ body::before{
   }
 }
 
-.slide-progress{
-  position:absolute;
-  top:0;
-  left:0;
-  z-index:40;
-  height:3px;
-  width:0;
-  background:linear-gradient(90deg,var(--gold),var(--gold2));
-  box-shadow:0 0 18px rgba(212,175,55,.55);
+/* CAPTION SYNC — texte qui s'affiche sur la slide courante */
+.caption{
+  position:fixed;
+  bottom:calc(88px + env(safe-area-inset-bottom,0px));
+  left:50%;transform:translateX(-50%);
+  z-index:50;
+  width:min(92vw,600px);
+  padding:11px 16px;
+  border-radius:16px;
+  background:rgba(6,14,7,.72);
+  border:1px solid rgba(212,175,55,.18);
+  backdrop-filter:blur(14px);
+  color:rgba(237,232,223,.88);
+  font-size:.82rem;
+  font-weight:600;
+  line-height:1.55;
+  text-align:center;
+  letter-spacing:.01em;
+  opacity:0;
+  transition:opacity .4s ease;
+  pointer-events:none;
 }
+.caption.visible{opacity:1}
+@media(max-width:480px){
+  .caption{font-size:.75rem;padding:9px 13px;bottom:calc(82px + env(safe-area-inset-bottom,0px));}
+}
+
+.slide-counter{
+  position:fixed;
+  top:10px;right:14px;
+  z-index:50;
+  font-size:.65rem;font-weight:800;letter-spacing:.06em;
+  color:rgba(212,175,55,.55);
+  pointer-events:none;
+}
+
+.slide-progress{position:absolute;top:0;left:0;z-index:40;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));box-shadow:0 0 18px rgba(212,175,55,.55);}
 .arrow{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  z-index:35;
-  width:40px;
-  height:48px;
-  border-radius:999px;
-  border:1px solid rgba(212,175,55,.22);
-  background:rgba(0,0,0,.24);
-  color:rgba(240,200,67,.86);
-  font-size:1.5rem;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  user-select:none;
-  -webkit-tap-highlight-color:transparent;
-  backdrop-filter:blur(8px);
+  position:absolute;top:50%;transform:translateY(-50%);z-index:35;
+  width:40px;height:48px;border-radius:999px;
+  border:1px solid rgba(212,175,55,.22);background:rgba(0,0,0,.24);
+  color:rgba(240,200,67,.86);font-size:1.5rem;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;backdrop-filter:blur(8px);
 }
-.arrow.prev{left:10px}
-.arrow.next{right:10px}
+.arrow.prev{left:10px}.arrow.next{right:10px}
 .arrow:active{transform:translateY(-50%) scale(.96)}
 @media(max-width:480px){
   .arrow{width:34px;height:42px;font-size:1.25rem;opacity:.62}
-  .arrow.prev{left:7px}
-  .arrow.next{right:7px}
+  .arrow.prev{left:7px}.arrow.next{right:7px}
 }
 
-.fab-wrap{
-  position:fixed;
-  right:16px;
-  bottom:calc(16px + env(safe-area-inset-bottom,0px));
-  z-index:90;
-  display:flex;
-  flex-direction:column;
-  align-items:flex-end;
-  gap:10px;
-}
+.fab-wrap{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:90;display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
 .fab-panel{
-  max-width:min(92vw,520px);
-  display:flex;
-  align-items:center;
-  gap:9px;
-  flex-wrap:wrap;
-  padding:10px;
-  border-radius:18px;
-  border:1px solid rgba(212,175,55,.30);
-  background:rgba(6,14,7,.86);
-  backdrop-filter:blur(18px);
-  box-shadow:0 16px 50px rgba(0,0,0,.50);
-  transform:translateY(10px) scale(.96);
-  opacity:0;
-  pointer-events:none;
-  transition:all .25s ease;
+  max-width:min(92vw,520px);display:flex;align-items:center;gap:9px;flex-wrap:wrap;
+  padding:10px;border-radius:18px;border:1px solid rgba(212,175,55,.30);
+  background:rgba(6,14,7,.86);backdrop-filter:blur(18px);box-shadow:0 16px 50px rgba(0,0,0,.50);
+  transform:translateY(10px) scale(.96);opacity:0;pointer-events:none;transition:all .25s ease;
 }
 .fab-panel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:auto}
 .fab-mini-btn{
-  width:42px;
-  height:42px;
-  border-radius:13px;
-  border:1px solid rgba(255,255,255,.10);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  font-size:1rem;
-  font-family:var(--sans);
-  -webkit-tap-highlight-color:transparent;
+  width:42px;height:42px;border-radius:13px;border:1px solid rgba(255,255,255,.10);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  font-size:1rem;font-family:var(--sans);-webkit-tap-highlight-color:transparent;
 }
 .fab-mini-play{background:linear-gradient(135deg,#D4AF37,#a07c00);color:#060e07;border:none;font-weight:900}
 .fab-mini-pause{background:rgba(255,255,255,.08);color:var(--cream)}
 .fab-mini-stop{background:rgba(220,50,50,.10);color:#ff9b9b;border-color:rgba(220,50,50,.22)}
 .fab-speeds{display:flex;gap:6px;flex-wrap:wrap}
 .fab-spd{
-  border-radius:999px;
-  padding:7px 10px;
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(255,255,255,.06);
-  color:rgba(237,232,223,.72);
-  font-size:.74rem;
-  font-weight:800;
-  font-family:var(--sans);
-  cursor:pointer;
+  border-radius:999px;padding:7px 10px;border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.06);color:rgba(237,232,223,.72);
+  font-size:.74rem;font-weight:800;font-family:var(--sans);cursor:pointer;
 }
 .fab-spd.on{background:rgba(212,175,55,.15);border-color:rgba(212,175,55,.42);color:var(--gold)}
 .fab-main{
-  position:relative;
-  width:76px;
-  height:76px;
-  border-radius:50%;
-  border:none;
-  background:linear-gradient(135deg,#D4AF37 0%,#8a6200 100%);
-  color:#060e07;
-  font-size:1.4rem;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  box-shadow:0 12px 36px rgba(212,175,55,.42),0 0 0 5px rgba(212,175,55,.10);
-  font-weight:900;
-  -webkit-tap-highlight-color:transparent;
+  position:relative;width:76px;height:76px;border-radius:50%;border:none;
+  background:linear-gradient(135deg,#D4AF37 0%,#8a6200 100%);color:#060e07;
+  font-size:1.4rem;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;box-shadow:0 12px 36px rgba(212,175,55,.42),0 0 0 5px rgba(212,175,55,.10);
+  font-weight:900;-webkit-tap-highlight-color:transparent;
 }
 .fab-main.playing{animation:pulse-gold 2s ease-in-out infinite}
 @keyframes pulse-gold{
@@ -221,48 +148,23 @@ body::before{
   50%{box-shadow:0 12px 42px rgba(212,175,55,.62),0 0 0 12px rgba(212,175,55,.06)}
 }
 .fab-main-label{
-  position:absolute;
-  top:-11px;
-  left:50%;
-  transform:translateX(-50%);
-  padding:4px 9px;
-  border-radius:999px;
-  background:rgba(212,175,55,.96);
-  color:#060e07;
-  font-size:.62rem;
-  line-height:1;
-  font-weight:900;
-  letter-spacing:.08em;
-  white-space:nowrap;
+  position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+  padding:4px 9px;border-radius:999px;background:rgba(212,175,55,.96);color:#060e07;
+  font-size:.62rem;line-height:1;font-weight:900;letter-spacing:.08em;white-space:nowrap;
 }
 .fab-prog{
-  position:absolute;
-  inset:-5px;
-  border-radius:50%;
+  position:absolute;inset:-5px;border-radius:50%;
   background:conic-gradient(var(--gold) 0deg,transparent 0deg);
   mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 0);
   -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 0);
-  opacity:.78;
-  transition:background .5s linear;
+  opacity:.78;transition:background .5s linear;
 }
 .status-pill{
-  position:fixed;
-  left:14px;
-  bottom:calc(18px + env(safe-area-inset-bottom,0px));
-  z-index:85;
-  max-width:calc(100vw - 116px);
-  padding:8px 11px;
-  border-radius:999px;
-  border:1px solid rgba(212,175,55,.22);
-  background:rgba(6,14,7,.58);
-  color:rgba(237,232,223,.76);
-  font-size:.72rem;
-  font-weight:700;
-  letter-spacing:.02em;
-  backdrop-filter:blur(10px);
-  overflow:hidden;
-  white-space:nowrap;
-  text-overflow:ellipsis;
+  position:fixed;left:14px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:85;
+  max-width:calc(100vw - 116px);padding:8px 11px;border-radius:999px;
+  border:1px solid rgba(212,175,55,.22);background:rgba(6,14,7,.58);
+  color:rgba(237,232,223,.76);font-size:.72rem;font-weight:700;letter-spacing:.02em;
+  backdrop-filter:blur(10px);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
 }
 @media(max-width:480px){
   .fab-wrap{right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px))}
@@ -273,110 +175,48 @@ body::before{
   .fab-spd{font-size:.70rem;padding:6px 8px}
   .status-pill{left:10px;bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:calc(100vw - 104px);font-size:.68rem}
 }
-
-.hidden-text{
-  position:absolute!important;
-  left:-9999px!important;
-  width:1px!important;
-  height:1px!important;
-  overflow:hidden!important;
-}
+.hidden-text{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important;}
 </style>
 </head>
 <body>
+
 <section class="slideshow" id="ss" aria-label="DIGIY BUSINESS en images">
   <div class="slide-progress" id="sp"></div>
-  <div class="slide active">
-    <img src="https://digiylyfe.net/wp-content/uploads/2026/04/ChatGPT-Image-30-avr.-2026-15_19_48.png" alt="DIGIYLYFE vision 1" loading="eager" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2026/04/ChatGPT-Image-27-avr.-2026-18_05_48.png" alt="DIGIYLYFE vision 2" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2026/03/cropped-digiylyfe_logo_qr.jpeg" alt="Logo DIGIYLYFE" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2026/04/Image.png" alt="DIGIYLYFE image 4" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2026/04/Image-11.jpeg" alt="DIGIYLYFE image 5" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2026/03/digiy_services_avec_logo.webp" alt="Services DIGIY" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2025/08/Image-28-08-2025-a-13.23.jpeg" alt="DIGIYLYFE image 7" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2026/04/image_9411f70d.png" alt="DIGIYLYFE image 8" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2025/09/121-REVUE.png" alt="Revue DIGIY 121" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2025/09/125-REVUE.png" alt="Revue DIGIY 125" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-26-mai-2026-07_50_59.png" alt="DIGIY BUSINESS image 10" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-26-mai-2026-07_42_39.png" alt="DIGIY BUSINESS image 11" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-26-mai-2026-07_21_44.png" alt="DIGIY BUSINESS image 12" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-26-mai-2026-07_07_28.png" alt="DIGIY BUSINESS image 13" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-26-mai-2026-07_16_10.png" alt="DIGIY BUSINESS image 14" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-25-mai-2026-01_35_26.png" alt="DIGIY BUSINESS image 15" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-25-mai-2026-01_25_44-1.png" alt="DIGIY BUSINESS image 16" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-14-mai-2026-04_01_44.png" alt="DIGIY BUSINESS image 17" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/DIGIY-COMMERCE.png" alt="DIGIY Commerce image 18" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-A.png" alt="Astou Boutique DIGIY image 19" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-D.png" alt="Astou Boutique DIGIY image 20" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2026/04/ChatGPT-Image-30-avr.-2026-21_27_04.png" alt="DIGIY BUSINESS image 21" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2026/02/102.webp" alt="DIGIY BUSINESS image 22" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2026/02/114-REVUE.webp" alt="Revue DIGIY image 23" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2025/09/149-REVUE.png" alt="Revue DIGIY image 24" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2025/09/126-revue.png" alt="Revue DIGIY image 25" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2025/09/IMG_5222.png" alt="DIGIY BUSINESS image 26" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2025/09/152-REVUE.png" alt="Revue DIGIY image 27" loading="lazy" decoding="async">
-  </div>
-  <div class="slide">
-    <img src="https://digiylyfe.net/wp-content/uploads/2025/09/118-REVUE.png" alt="Revue DIGIY image 28" loading="lazy" decoding="async">
-  </div>
+  <div class="slide active"><img src="https://digiylyfe.net/wp-content/uploads/2026/04/ChatGPT-Image-30-avr.-2026-15_19_48.png" alt="DIGIY BUSINESS vision 1" loading="eager" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2026/04/ChatGPT-Image-27-avr.-2026-18_05_48.png" alt="DIGIY BUSINESS vision 2" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2026/03/cropped-digiylyfe_logo_qr.jpeg" alt="Logo DIGIYLYFE" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2026/04/Image.png" alt="DIGIY BUSINESS image 4" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2026/04/Image-11.jpeg" alt="DIGIY BUSINESS image 5" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2026/03/digiy_services_avec_logo.webp" alt="Services DIGIY" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2025/08/Image-28-08-2025-a-13.23.jpeg" alt="DIGIY BUSINESS image 7" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2026/04/image_9411f70d.png" alt="DIGIY BUSINESS image 8" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2025/09/121-REVUE.png" alt="Revue DIGIY 121" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2025/09/125-REVUE.png" alt="Revue DIGIY 125" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-26-mai-2026-07_50_59.png" alt="DIGIY BUSINESS image 11" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-26-mai-2026-07_42_39.png" alt="DIGIY BUSINESS image 12" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-26-mai-2026-07_21_44.png" alt="DIGIY BUSINESS image 13" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-26-mai-2026-07_07_28.png" alt="DIGIY BUSINESS image 14" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-26-mai-2026-07_16_10.png" alt="DIGIY BUSINESS image 15" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-25-mai-2026-01_35_26.png" alt="DIGIY BUSINESS image 16" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-25-mai-2026-01_25_44-1.png" alt="DIGIY BUSINESS image 17" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-14-mai-2026-04_01_44.png" alt="DIGIY BUSINESS image 18" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/DIGIY-COMMERCE.png" alt="DIGIY Commerce" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-A.png" alt="Astou Boutique DIGIY" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-D.png" alt="Astou Boutique DIGIY" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2026/04/ChatGPT-Image-30-avr.-2026-21_27_04.png" alt="DIGIY BUSINESS image 22" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2026/02/102.webp" alt="DIGIY BUSINESS image 23" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2026/02/114-REVUE.webp" alt="Revue DIGIY 114" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2025/09/149-REVUE.png" alt="Revue DIGIY 149" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2025/09/126-revue.png" alt="Revue DIGIY 126" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2025/09/IMG_5222.png" alt="DIGIY BUSINESS image 27" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2025/09/152-REVUE.png" alt="Revue DIGIY 152" loading="lazy" decoding="async"></div>
+  <div class="slide"><img src="https://digiylyfe.net/wp-content/uploads/2025/09/118-REVUE.png" alt="Revue DIGIY 118" loading="lazy" decoding="async"></div>
   <button class="arrow prev" id="bp" aria-label="Image précédente">‹</button>
   <button class="arrow next" id="bn" aria-label="Image suivante">›</button>
 </section>
 
+<div class="caption" id="caption"></div>
+<div class="slide-counter" id="slideCounter">1 / 29</div>
 <div class="status-pill" id="st">DIGIY BUSINESS · prêt à écouter</div>
 
 <div class="fab-wrap" id="fabWrap">
@@ -400,12 +240,68 @@ body::before{
 
 <div class="hidden-text" aria-hidden="true">
   <h1>DIGIY BUSINESS</h1>
-  <p>L’accélérateur des pistes du village. Travailler avec les nouveaux outils du business indépendant.</p>
-  <p>Le téléphone devient ta pioche. La fiche devient ta vitrine. Le QR devient ta porte. Wave devient ton argent. Le réseau devient ta force.</p>
+  <p>L'accélérateur des pistes du village.</p>
 </div>
 
 <script>
-const IMAGE_URLS = [
+// ─── BLOCS : texte synchronisé par slide ─────────────────────────────────────
+// Chaque bloc correspond exactement à la slide du même index (0-based)
+const BLOCS = [
+  "DIGIY BUSINESS. L'accélérateur des pistes du village. Travailler avec les nouveaux outils du business indépendant.",
+  "Téléphone. Q R. Wave. WhatsApp. I A. Réseau. PAY. Voix. Fiche digitale.",
+  "DIGIY BUSINESS n'est pas une école classique. Ce n'est pas un cours froid. Ce n'est pas une théorie d'autoroute.",
+  "C'est un programme vivant pour apprendre à travailler avec les nouveaux outils du terrain. On vient avec son téléphone. On repart avec son business en main.",
+  "Le téléphone devient ta pioche. La fiche devient ta vitrine. Le Q R devient ta porte. Wave devient ton argent. Le réseau devient ta force.",
+  "Ta pioche ne pèse que quelques grammes, mais elle peut contenir le monde. DIGIY BUSINESS prend des personnes du terrain avec un téléphone, et leur apprend à devenir visibles, organisées, joignables, payables, fières, autonomes, et capables de faire grandir leur activité.",
+  "La destination n'est pas de faire des élèves. La destination, c'est de révéler des bâtisseurs indépendants du terrain. DIGIY BUSINESS ne forme pas seulement. Il déclenche, accompagne, équipe et relie.",
+  "DIGIY BUSINESS n'est pas l'école du goudron des autoroutes. C'est l'école des pistes du village. Sur les grands axes, tout paraît moderne. Mais dès qu'on entre dans un quartier, le sable revient sous les semelles.",
+  "DIGIY part de cette réalité. Pas depuis un bureau climatisé. Pas depuis des modèles importés. Pas depuis des discours éloignés du peuple.",
+  "DIGIY part du téléphone dans la main, du client sur WhatsApp, de l'argent sur Wave, du Q R imprimé, de la fiche partagée, de la boutique ouverte, du chauffeur disponible, de l'artisan en mouvement.",
+  "De la famille qui relaie, du réseau humain qui fait circuler la confiance. DIGIY apprend à avancer là où la route change.",
+  "DIGIY BUSINESS ne force pas un même rythme pour tout le monde. Le terrain n'avance pas avec un chronomètre unique. Certains comprennent vite. D'autres ont besoin d'être rassurés.",
+  "D'autres doivent répéter, tester, parler, voir, toucher, partager, recommencer. Le programme s'adapte au métier, à la ville, à la personne, au niveau, au téléphone, à la langue, au rythme du terrain.",
+  "L'objectif reste clair : déclencher l'étincelle, installer la flamme, créer des habitudes, faire grandir l'activité, et relier chaque pro à la force du réseau.",
+  "Avant de séparer les métiers, tout le monde apprend les bases du business indépendant. Mon nom. Mon métier. Ma fiche. Mon Q R. Mon WhatsApp. Mon paiement. Mon message client. Mon premier suivi PAY. Ma première annonce. Ma première preuve de visibilité.",
+  "Ce socle crée une culture commune. Ensuite seulement, chaque métier entre dans son atelier. DRIVER apprend ses courses. MARKET apprend ses produits. BUILD apprend ses devis. LOC apprend ses réservations.",
+  "PAY apprend l'argent. RÉSEAU apprend la visibilité. VOIX apprend à parler, copier, envoyer, écouter.",
+  "DIGIY BUSINESS accueille des profils différents : chauffeurs, boutiques, artisans, restaurants, loueurs, services, jeunes, femmes commerçantes, professionnels qualifiés. Cette mixité est une richesse. Des métiers différents. Une même piste. Un même village digital.",
+  "Ce que DIGIY BUSINESS enseigne, ce sont les gestes simples qui changent la vie d'un pro : être visible, présenter son activité, parler clairement au client, envoyer un message propre, partager sa fiche, faire circuler son Q R, recevoir un paiement, garder une preuve.",
+  "Suivre ses recettes, noter ses dépenses, comprendre recette et bénéfice, acompte et solde, dette et paiement reçu. Ce n'est pas seulement du digital. C'est de l'éducation économique du terrain.",
+  "DIGIY BUSINESS est le Y C du terrain, mais à la sénégalaise. Y C accélère les startups. DIGIY accélère les pros du terrain. Pas pour lever des fonds d'abord, mais pour devenir visible, joignable, payable, organisé, crédible et autonome.",
+  "Chaque groupe devient aussi un laboratoire vivant. Le terrain parle. DIGIY écoute. Les modules évoluent. Les meilleurs participants peuvent devenir ambassadeurs : pas influenceurs, pas blabla, mais relais de confiance. Le réseau humain porte le réseau digital.",
+  "DIGIY BUSINESS peut se déplacer dans une boutique, chez un partenaire, dans une salle simple, dans un restaurant, dans un quartier, sur iPad, sur téléphone, avec Q R et WhatsApp. L'iPad fait comprendre. Le téléphone fait travailler.",
+  "À la fin d'un parcours, le participant ne reçoit pas seulement un papier. Il reçoit une preuve qui travaille : fiche DIGIY active, Q R actif, message client prêt, première annonce, premier suivi PAY, mini profil pro, badge Pro DIGIY formé.",
+  "Pas un diplôme qui dort dans un tiroir. Une présence visible, utile, partageable.",
+  "Tout ce qui sort de DIGIY BUSINESS nourrit DIGIY MÉMOIRE : phrases fortes, erreurs à ne plus refaire, habitudes terrain, mots en langues locales, modèles de messages, parcours métier, témoignages, doctrines. Une œuvre sans mémoire peut se diluer. Une œuvre qui garde sa mémoire devient une culture.",
+  "DIGIYLYFE construit les outils. DIGIY BUSINESS forme les humains. DIGIY MÉMOIRE protège l'esprit. DIGIY RÉSEAU fait circuler la confiance. DIGIY STORE équipe le pro. Là, DIGIYLYFE n'est plus seulement une Supa-Apps. C'est un écosystème complet : outil, formation, culture, réseau, mémoire, transmission.",
+  "DIGIY BUSINESS ne forme pas des élèves. Il révèle des bâtisseurs indépendants du terrain.",
+  "Pas l'autoroute froide. La piste vivante. Celle où le sable colle aux semelles, mais où le village avance quand même. Ancré en Afrique. Ouvert au monde. Pierre par pierre."
+];
+
+// ─── PHONÉTIQUE ───────────────────────────────────────────────────────────────
+function phoneticize(text){
+  return String(text||"")
+    .replace(/0\s*%/g,"zéro pour cent")
+    .replace(/\bDIGIYLYFE\b/gi,"diji laïfe")
+    .replace(/\bDIGIY\b/gi,"diji i")
+    .replace(/\bBUILD\b/gi,"artisans")
+    .replace(/\bDRIVER\b/gi,"chauffeurs")
+    .replace(/\bMARKET\b/gi,"marchands")
+    .replace(/\bLOC\b/gi,"location")
+    .replace(/\bPAY\b/gi,"paye")
+    .replace(/\bRÉSEAU\b/gi,"réseau")
+    .replace(/\bVOIX\b/gi,"voix")
+    .replace(/\bY\s*C\b/g,"why kombinator")
+    .replace(/\bQR\b/g,"Q R")
+    .replace(/\bSMS\b/g,"S M S")
+    .replace(/\bWhatsApp\b/gi,"Ouatsap")
+    .replace(/\bWave\b/gi,"Ouève")
+    .replace(/\bI\s*A\b/g,"intelligence artificielle")
+    .replace(/\biPad\b/gi,"aïpad");
+}
+
+// ─── IMAGES preload ───────────────────────────────────────────────────────────
+const IMAGE_URLS=[
   "https://digiylyfe.net/wp-content/uploads/2026/04/ChatGPT-Image-30-avr.-2026-15_19_48.png",
   "https://digiylyfe.net/wp-content/uploads/2026/04/ChatGPT-Image-27-avr.-2026-18_05_48.png",
   "https://digiylyfe.net/wp-content/uploads/2026/03/cropped-digiylyfe_logo_qr.jpeg",
@@ -436,125 +332,149 @@ const IMAGE_URLS = [
   "https://digiylyfe.net/wp-content/uploads/2025/09/152-REVUE.png",
   "https://digiylyfe.net/wp-content/uploads/2025/09/118-REVUE.png"
 ];
-const TEXT = "DIGIY BUSINESS. L'accélérateur des pistes du village. Travailler avec les nouveaux outils du business indépendant. Téléphone. Q R. Wave. WhatsApp. I A. Réseau. PAY. Voix. Fiche digitale. DIGIY BUSINESS n'est pas une école classique. Ce n'est pas un cours froid. Ce n'est pas une théorie d'autoroute. C'est un programme vivant pour apprendre à travailler avec les nouveaux outils du terrain. On vient avec son téléphone. On repart avec son business en main. Le téléphone devient ta pioche. La fiche devient ta vitrine. Le Q R devient ta porte. Wave devient ton argent. Le réseau devient ta force. Ta pioche ne pèse que quelques grammes, mais elle peut contenir le monde. DIGIY BUSINESS prend des personnes du terrain avec un téléphone, et leur apprend à devenir visibles, organisées, joignables, payables, fières, autonomes, et capables de faire grandir leur activité. La destination n'est pas de faire des élèves. La destination, c'est de révéler des bâtisseurs indépendants du terrain. DIGIY BUSINESS ne forme pas seulement. Il déclenche, accompagne, équipe et relie. DIGIY BUSINESS n'est pas l'école du goudron des autoroutes. C'est l'école des pistes du village. Sur les grands axes, tout paraît moderne. Mais dès qu'on entre dans un quartier, le sable revient sous les semelles. DIGIY part de cette réalité. Pas depuis un bureau climatisé. Pas depuis des modèles importés. Pas depuis des discours éloignés du peuple. DIGIY part du téléphone dans la main, du client sur WhatsApp, de l'argent sur Wave, du Q R imprimé, de la fiche partagée, de la boutique ouverte, du chauffeur disponible, de l'artisan en mouvement, de la famille qui relaie, du réseau humain qui fait circuler la confiance. DIGIY apprend à avancer là où la route change. DIGIY BUSINESS ne force pas un même rythme pour tout le monde. Le terrain n'avance pas avec un chronomètre unique. Certains comprennent vite. D'autres ont besoin d'être rassurés. D'autres doivent répéter, tester, parler, voir, toucher, partager, recommencer. Le programme s'adapte au métier, à la ville, à la personne, au niveau, au téléphone, à la langue, au rythme du terrain. L'objectif reste clair : déclencher l'étincelle, installer la flamme, créer des habitudes, faire grandir l'activité, et relier chaque pro à la force du réseau. Avant de séparer les métiers, tout le monde apprend les bases du business indépendant. Mon nom. Mon métier. Ma fiche. Mon Q R. Mon WhatsApp. Mon paiement. Mon message client. Mon premier suivi PAY. Ma première annonce. Ma première preuve de visibilité. Ce socle crée une culture commune. Ensuite seulement, chaque métier entre dans son atelier. DRIVER apprend ses courses. MARKET apprend ses produits. BUILD apprend ses devis. LOC apprend ses réservations. PAY apprend l'argent. RÉSEAU apprend la visibilité. VOIX apprend à parler, copier, envoyer, écouter. DIGIY BUSINESS accueille des profils différents : chauffeurs, boutiques, artisans, restaurants, loueurs, services, jeunes, femmes commerçantes, professionnels qualifiés. Cette mixité est une richesse. Des métiers différents. Une même piste. Un même village digital. Ce que DIGIY BUSINESS enseigne, ce sont les gestes simples qui changent la vie d'un pro : être visible, présenter son activité, parler clairement au client, envoyer un message propre, partager sa fiche, faire circuler son Q R, recevoir un paiement, garder une preuve, suivre ses recettes, noter ses dépenses, comprendre recette et bénéfice, acompte et solde, dette et paiement reçu. Ce n'est pas seulement du digital. C'est de l'éducation économique du terrain. DIGIY BUSINESS est le Y C du terrain, mais à la sénégalaise. Y C accélère les startups. DIGIY accélère les pros du terrain. Pas pour lever des fonds d'abord, mais pour devenir visible, joignable, payable, organisé, crédible et autonome. Chaque groupe devient aussi un laboratoire vivant. Le terrain parle. DIGIY écoute. Les modules évoluent. Les meilleurs participants peuvent devenir ambassadeurs : pas influenceurs, pas blabla, mais relais de confiance. Le réseau humain porte le réseau digital. DIGIY BUSINESS peut se déplacer dans une boutique, chez un partenaire, dans une salle simple, dans un restaurant, dans un quartier, sur iPad, sur téléphone, avec Q R et WhatsApp. L'iPad fait comprendre. Le téléphone fait travailler. À la fin d'un parcours, le participant ne reçoit pas seulement un papier. Il reçoit une preuve qui travaille : fiche DIGIY active, Q R actif, message client prêt, première annonce, premier suivi PAY, mini profil pro, badge Pro DIGIY formé. Pas un diplôme qui dort dans un tiroir. Une présence visible, utile, partageable. Tout ce qui sort de DIGIY BUSINESS nourrit DIGIY MÉMOIRE : phrases fortes, erreurs à ne plus refaire, habitudes terrain, mots en langues locales, modèles de messages, parcours métier, témoignages, doctrines. Une œuvre sans mémoire peut se diluer. Une œuvre qui garde sa mémoire devient une culture. DIGIYLYFE construit les outils. DIGIY BUSINESS forme les humains. DIGIY MÉMOIRE protège l'esprit. DIGIY RÉSEAU fait circuler la confiance. DIGIY STORE équipe le pro. Là, DIGIYLYFE n'est plus seulement une Supa-Apps. C'est un écosystème complet : outil, formation, culture, réseau, mémoire, transmission. DIGIY BUSINESS ne forme pas des élèves. Il révèle des bâtisseurs indépendants du terrain. Pas l'autoroute froide. La piste vivante. Celle où le sable colle aux semelles, mais où le village avance quand même.";
-
-IMAGE_URLS.forEach(src => { const i = new Image(); i.src = src; });
-document.querySelectorAll('.slide').forEach(slide => {
-  const img = slide.querySelector('img');
-  if(img) slide.style.setProperty('--slide-bg', `url("${img.currentSrc || img.src}")`);
+IMAGE_URLS.forEach(src=>{const i=new Image();i.src=src;});
+document.querySelectorAll('.slide').forEach(slide=>{
+  const img=slide.querySelector('img');
+  if(img) slide.style.setProperty('--slide-bg',`url("${img.currentSrc||img.src}")`);
 });
 
-(function(){
-  const slides=[...document.querySelectorAll('.slide')];
-  const bar=document.getElementById('sp');
-  const DUR=8000;
-  let cur=0, timer=null;
+// ─── SLIDESHOW manuel (hors lecture audio) ────────────────────────────────────
+const slides=[...document.querySelectorAll('.slide')];
+const bar=document.getElementById('sp');
+const DUR=8000;
+let cur=0, loopTimer=null, syncMode=false;
 
-  function goTo(i){
-    slides[cur].classList.remove('active');
-    cur=(i+slides.length)%slides.length;
-    slides[cur].classList.add('active');
-    runProg();
-  }
+function goTo(i,fromSync){
+  slides[cur].classList.remove('active');
+  cur=(i+slides.length)%slides.length;
+  slides[cur].classList.add('active');
+  updateCounter();
+  if(!fromSync) runProg();
+}
+function runProg(){
+  if(!bar) return;
+  bar.style.transition='none';bar.style.width='0%';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    bar.style.transition='width '+DUR+'ms linear';
+    bar.style.width='100%';
+  }));
+}
+function startLoop(){clearInterval(loopTimer);loopTimer=setInterval(()=>goTo(cur+1),DUR);}
+function stopLoop(){clearInterval(loopTimer);}
+function updateCounter(){
+  const el=document.getElementById('slideCounter');
+  if(el) el.textContent=(cur+1)+' / '+slides.length;
+}
+window.DIGIY_SLIDES={goTo,startLoop,stopLoop};
 
-  function runProg(){
-    if(!bar) return;
-    bar.style.transition='none';
-    bar.style.width='0%';
-    requestAnimationFrame(()=>requestAnimationFrame(()=>{
-      bar.style.transition='width '+DUR+'ms linear';
-      bar.style.width='100%';
-    }));
-  }
+document.getElementById('bp')?.addEventListener('click',()=>{if(!syncMode){goTo(cur-1);startLoop();}});
+document.getElementById('bn')?.addEventListener('click',()=>{if(!syncMode){goTo(cur+1);startLoop();}});
+let tx=0;
+const ss=document.getElementById('ss');
+ss.addEventListener('touchstart',e=>tx=(e.touches&&e.touches[0]?e.touches[0]:e.changedTouches[0]).clientX,{passive:true});
+ss.addEventListener('touchend',e=>{
+  if(syncMode) return;
+  const dx=e.changedTouches[0].clientX-tx;
+  if(Math.abs(dx)>45){goTo(dx<0?cur+1:cur-1);startLoop();}
+},{passive:true});
 
-  function startLoop(){
-    clearInterval(timer);
-    timer=setInterval(()=>goTo(cur+1), DUR);
-  }
+runProg();startLoop();
+updateCounter();
 
-  function restart(){ startLoop(); }
-  window.DIGIY_SLIDES={goTo,restart,startLoop};
+// ─── CAPTION ─────────────────────────────────────────────────────────────────
+const captionEl=document.getElementById('caption');
+function showCaption(text){
+  if(!captionEl) return;
+  captionEl.textContent=text;
+  captionEl.classList.add('visible');
+}
+function hideCaption(){
+  if(!captionEl) return;
+  captionEl.classList.remove('visible');
+}
 
-  document.getElementById('bp')?.addEventListener('click',()=>{goTo(cur-1); restart();});
-  document.getElementById('bn')?.addEventListener('click',()=>{goTo(cur+1); restart();});
+// ─── MOTEUR AUDIO SYNCHRONISÉ ─────────────────────────────────────────────────
+// Stratégie : on joue chaque bloc via une SpeechSynthesisUtterance séparée.
+// onend du bloc N → slide N+1 + lecture bloc N+1.
+// C'est la méthode la plus fiable cross-browser (boundary events peu fiables sur mobile).
 
-  let tx=0;
-  const ss=document.getElementById('ss');
-  ss.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
-  ss.addEventListener('touchend',e=>{
-    const dx=e.changedTouches[0].clientX-tx;
-    if(Math.abs(dx)>45){ goTo(dx<0?cur+1:cur-1); restart(); }
-  },{passive:true});
-
-  runProg();
-  startLoop();
-})();
-
-let utter=null, rate=0.86, paused=false, pInt=null, fabOpen=false;
+let rate=0.86, paused=false, pInt=null, fabOpen=false;
 let digiyWakeLock=null;
+let blocIndex=0, uttCurrent=null, isPlaying=false;
 
 async function digiyKeepScreenAwake(){
   try{
-    if('wakeLock' in navigator && !digiyWakeLock){
-      digiyWakeLock = await navigator.wakeLock.request('screen');
-      if(digiyWakeLock && digiyWakeLock.addEventListener){
-        digiyWakeLock.addEventListener('release',()=>{ digiyWakeLock=null; });
-      }
+    if('wakeLock' in navigator&&!digiyWakeLock){
+      digiyWakeLock=await navigator.wakeLock.request('screen');
+      digiyWakeLock?.addEventListener('release',()=>digiyWakeLock=null);
     }
-  }catch(e){
-    digiyWakeLock=null;
-  }
+  }catch(e){digiyWakeLock=null;}
 }
-
 async function digiyReleaseWakeLock(){
-  try{
-    if(digiyWakeLock){
-      const lock=digiyWakeLock;
-      digiyWakeLock=null;
-      await lock.release();
-    }
-  }catch(e){
-    digiyWakeLock=null;
-  }
+  try{if(digiyWakeLock){const l=digiyWakeLock;digiyWakeLock=null;await l.release();}}
+  catch(e){digiyWakeLock=null;}
 }
-
 document.addEventListener('visibilitychange',()=>{
-  if(document.visibilityState==='visible' && window.speechSynthesis && window.speechSynthesis.speaking && !paused){
-    digiyKeepScreenAwake();
-  }
+  if(document.visibilityState==='visible'&&isPlaying&&!paused) digiyKeepScreenAwake();
 });
 
+function speakBloc(index){
+  if(index>=BLOCS.length){
+    // fin
+    digiyReleaseWakeLock();
+    setStatus('✓ Vision terminée');
+    setProgress(100);clearInterval(pInt);
+    paused=false;isPlaying=false;syncMode=false;
+    setFabState('stop');hideCaption();
+    startLoop();
+    return;
+  }
+  blocIndex=index;
+  const text=BLOCS[index];
+  goTo(index,true);
+  showCaption(text);
+  updateCounter();
+  // progress bar bloc
+  bar.style.transition='none';bar.style.width='0%';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    // on estime la durée du bloc proportionnellement au total
+    const totalChars=BLOCS.reduce((a,b)=>a+b.length,0);
+    const blocDur=(text.length/totalChars)*(totalChars/(rate*14))*1000;
+    bar.style.transition='width '+blocDur+'ms linear';
+    bar.style.width='100%';
+  }));
 
-function digiySpeakText(text){
-  return String(text || "")
-    .replace(/0\s*%/g, "zéro pour cent")
-    .replace(/\bDIGIYLYFE\b/gi, "diji laïfe")
-    .replace(/\bBUILD\b/gi, "artisans tout corps de métiers")
-    .replace(/\bQR\b/g, "Q R")
-    .replace(/\bSMS\b/g, "S M S")
-    .replace(/\bWhatsApp\b/gi, "Ouatsap")
-    .replace(/\bWave\b/gi, "Ouève")
-    .replace(/\bDIGIY\b/gi, "diji i");
+  const u=new SpeechSynthesisUtterance(phoneticize(text));
+  u.lang='fr-FR';u.rate=rate;u.pitch=1;u.volume=1;
+  const voices=window.speechSynthesis.getVoices();
+  const frV=voices.find(v=>v.lang&&v.lang.toLowerCase().startsWith('fr'));
+  if(frV) u.voice=frV;
+  uttCurrent=u;
+  u.onend=()=>{
+    if(!isPlaying) return;
+    speakBloc(index+1);
+  };
+  u.onerror=(e)=>{
+    if(e.error==='interrupted'||e.error==='canceled'||!isPlaying) return;
+    digiyReleaseWakeLock();
+    setStatus('⚠️ Erreur audio. Relance ÉCOUTE.');
+    setFabState('stop');isPlaying=false;syncMode=false;hideCaption();startLoop();
+  };
+  window.speechSynthesis.speak(u);
 }
 
 function digiyPlay(){
-  if(!('speechSynthesis' in window)){ setStatus('⚠️ Audio non disponible sur ce navigateur.'); return; }
-  try{ window.DIGIY_SLIDES?.goTo(0); window.DIGIY_SLIDES?.restart(); }catch(e){}
+  if(!('speechSynthesis' in window)){setStatus('⚠️ Audio non disponible.');return;}
+  isPlaying=true;syncMode=true;
   window.speechSynthesis.cancel();
   clearInterval(pInt);
-  digiyKeepScreenAwake();
-  utter=new SpeechSynthesisUtterance(digiySpeakText(TEXT));
-  utter.lang='fr-FR'; utter.rate=rate; utter.pitch=1; utter.volume=1;
-  const voices=window.speechSynthesis.getVoices();
-  const frV=voices.find(v=>v.lang&&v.lang.toLowerCase().startsWith('fr'));
-  if(frV) utter.voice=frV;
-  utter.onstart =()=>{ setStatus('▶ Vision en cours…'); startProg(); setFabState('play'); };
-  utter.onend   =()=>{ digiyReleaseWakeLock(); setStatus('✓ Vision terminée'); setProgress(100); clearInterval(pInt); paused=false; setFabState('stop'); };
-  utter.onerror =()=>{ digiyReleaseWakeLock(); setStatus('⚠️ Erreur audio. Relance ÉCOUTE.'); setFabState('stop'); };
-  utter.onpause =()=> setStatus('⏸ Vision en pause');
-  utter.onresume=()=> setStatus('▶ Reprise…');
   paused=false;
-  window.speechSynthesis.speak(utter);
+  stopLoop();
+  digiyKeepScreenAwake();
+  setFabState('play');
+  setStatus('▶ Lecture synchronisée…');
+  startGlobalProg();
+  speakBloc(0);
 }
 
 function digiyPause(){
@@ -563,7 +483,6 @@ function digiyPause(){
     window.speechSynthesis.resume();
     paused=false;
     digiyKeepScreenAwake();
-    startProg();
     setStatus('▶ Reprise…');
     setElText('fabPauseBtn','⏸');
     setFabState('play');
@@ -571,7 +490,6 @@ function digiyPause(){
     window.speechSynthesis.pause();
     paused=true;
     digiyReleaseWakeLock();
-    clearInterval(pInt);
     setStatus('⏸ Vision en pause');
     setElText('fabPauseBtn','▶');
     setFabState('pause');
@@ -583,56 +501,67 @@ function digiyStop(){
   digiyReleaseWakeLock();
   clearInterval(pInt);
   setProgress(0);
-  paused=false;
+  paused=false;isPlaying=false;syncMode=false;
   setElText('fabPauseBtn','⏸');
   setStatus('DIGIY BUSINESS · prêt à écouter');
   setFabState('stop');
+  hideCaption();
+  startLoop();
 }
 
 function setRate(r,el){
   rate=r;
   document.querySelectorAll('.fab-spd').forEach(b=>b.classList.remove('on'));
-  document.querySelectorAll('.fab-spd').forEach(b=>{ if(b.textContent===el.textContent) b.classList.add('on'); });
-  if(window.speechSynthesis&&window.speechSynthesis.speaking) digiyPlay();
-}
-
-function startProg(){
-  clearInterval(pInt);
-  const ms=(TEXT.length/(rate*14))*1000, t0=Date.now();
-  pInt=setInterval(()=>{ const p=Math.min(((Date.now()-t0)/ms)*100,99); setProgress(p); },500);
+  if(el) el.classList.add('on');
+  if(isPlaying&&!paused){
+    // relance propre depuis le bloc courant sans déclencher un double onend
+    const resumeIndex=blocIndex;
+    isPlaying=false;
+    window.speechSynthesis.cancel();
+    clearInterval(pInt);
+    setTimeout(()=>{
+      isPlaying=true;
+      syncMode=true;
+      stopLoop();
+      setStatus('▶ Lecture synchronisée…');
+      setFabState('play');
+      startGlobalProg();
+      speakBloc(resumeIndex);
+    },120);
+  }
 }
 
 function setProgress(p){
   const circ=document.getElementById('fabProgCircle');
   if(circ) circ.style.background=`conic-gradient(var(--gold) ${p*3.6}deg,transparent 0deg)`;
 }
+// progress global estimé
+function startGlobalProg(){
+  clearInterval(pInt);
+  const totalChars=BLOCS.reduce((a,b)=>a+b.length,0);
+  const totalMs=(totalChars/(rate*14))*1000;
+  const t0=Date.now();
+  pInt=setInterval(()=>{
+    const p=Math.min(((Date.now()-t0)/totalMs)*100,99);
+    setProgress(p);
+  },800);
+}
 
-function setStatus(m){ const el=document.getElementById('st'); if(el) el.textContent=m; }
-function setElText(id,h){ const el=document.getElementById(id); if(el) el.textContent=h; }
-
+function setStatus(m){const el=document.getElementById('st');if(el)el.textContent=m;}
+function setElText(id,h){const el=document.getElementById(id);if(el)el.textContent=h;}
 function setFabState(s){
-  const btn=document.getElementById('fabMain'); const ico=document.getElementById('fabIcon');
+  const btn=document.getElementById('fabMain');const ico=document.getElementById('fabIcon');
   if(!btn||!ico) return;
-  if(s==='play'){btn.classList.add('playing'); ico.textContent='🎧';}
-  if(s==='pause'){btn.classList.add('playing'); ico.textContent='⏸';}
-  if(s==='stop'){btn.classList.remove('playing'); ico.textContent='🎧';}
+  if(s==='play'){btn.classList.add('playing');ico.textContent='🎧';}
+  if(s==='pause'){btn.classList.add('playing');ico.textContent='⏸';}
+  if(s==='stop'){btn.classList.remove('playing');ico.textContent='🎧';}
 }
-
-function toggleFab(){
-  fabOpen=!fabOpen;
-  document.getElementById('fabPanel')?.classList.toggle('open',fabOpen);
-}
-
-function closeFab(){
-  fabOpen=false;
-  document.getElementById('fabPanel')?.classList.remove('open');
-}
-
+function toggleFab(){fabOpen=!fabOpen;document.getElementById('fabPanel')?.classList.toggle('open',fabOpen);}
+function closeFab(){fabOpen=false;document.getElementById('fabPanel')?.classList.remove('open');}
 document.addEventListener('click',e=>{
   const wrap=document.getElementById('fabWrap');
   if(wrap&&!wrap.contains(e.target)) closeFab();
 });
-
 if(window.speechSynthesis){
   window.speechSynthesis.getVoices();
   if(window.speechSynthesis.onvoiceschanged!==undefined){
@@ -642,6 +571,7 @@ if(window.speechSynthesis){
 </script>
 </body>
 </html>
+
 
 >
 
