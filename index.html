@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="DIGIYLYFE — Vision immersive : image plein écran et lecteur audio.">
-<title>DIGIYLYFE — Vision immersive</title>
+<meta name="description" content="DIGIY BUSINESS — L’accélérateur des pistes du village, vision immersive et lecteur audio.">
+<title>DIGIY BUSINESS — L’accélérateur des pistes du village</title>
 <meta name="theme-color" content="#060e07">
-<meta name="digiy-build" content="vision-immersive-image-audio-only-wakelock-20260526">
+<meta name="digiy-build" content="digiy-business-vision-audio-slides-20260531">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -81,22 +81,24 @@ body::before{
   object-fit:contain;
   object-position:center center;
   display:block;
-  transform:translate(-50%,-50%) scale(.94);
-  will-change:transform;
+  transform:translate3d(-50%,-50%,0) scale(.96);
+  transform-origin:center center;
+  will-change:transform, opacity;
   backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
   filter:drop-shadow(0 22px 42px rgba(0,0,0,.36));
 }
-.slide.active img{animation:visionFloatMobile 8s ease-in-out forwards}
+.slide.active img{animation:visionFloatMobile 8s linear forwards}
 @keyframes visionFloatMobile{
-  0%{transform:translate(-50%,-50%) scale(.92)}
-  100%{transform:translate(-50%,-50.4%) scale(.99)}
+  0%{transform:translate3d(-50%,-50%,0) scale(.955)}
+  100%{transform:translate3d(-50%,-50%,0) scale(.975)}
 }
 @media(min-width:700px){
-  .slide img{width:92vw;height:90vh;transform:translate(-50%,-50%) scale(.90)}
-  .slide.active img{animation:visionFloatDesktop 8s ease-in-out forwards}
+  .slide img{width:92vw;height:90vh;transform:translate3d(-50%,-50%,0) scale(.94)}
+  .slide.active img{animation:visionFloatDesktop 8s linear forwards}
   @keyframes visionFloatDesktop{
-    0%{transform:translate(-50%,-50%) scale(.88)}
-    100%{transform:translate(-50.15%,-50.2%) scale(.94)}
+    0%{transform:translate3d(-50%,-50%,0) scale(.935)}
+    100%{transform:translate3d(-50%,-50%,0) scale(.955)}
   }
 }
 
@@ -282,7 +284,7 @@ body::before{
 </style>
 </head>
 <body>
-<section class="slideshow" id="ss" aria-label="Vision DIGIYLYFE en images">
+<section class="slideshow" id="ss" aria-label="DIGIY BUSINESS en images">
   <div class="slide-progress" id="sp"></div>
   <div class="slide active">
     <img src="https://digiylyfe.net/wp-content/uploads/2026/04/ChatGPT-Image-30-avr.-2026-15_19_48.png" alt="DIGIYLYFE vision 1" loading="eager" decoding="async">
@@ -314,11 +316,68 @@ body::before{
   <div class="slide">
     <img src="https://digiylyfe.net/wp-content/uploads/2025/09/125-REVUE.png" alt="Revue DIGIY 125" loading="lazy" decoding="async">
   </div>
+  <div class="slide">
+    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-26-mai-2026-07_50_59.png" alt="DIGIY BUSINESS image 10" loading="lazy" decoding="async">
+  </div>
+  <div class="slide">
+    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-26-mai-2026-07_42_39.png" alt="DIGIY BUSINESS image 11" loading="lazy" decoding="async">
+  </div>
+  <div class="slide">
+    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-26-mai-2026-07_21_44.png" alt="DIGIY BUSINESS image 12" loading="lazy" decoding="async">
+  </div>
+  <div class="slide">
+    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-26-mai-2026-07_07_28.png" alt="DIGIY BUSINESS image 13" loading="lazy" decoding="async">
+  </div>
+  <div class="slide">
+    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-26-mai-2026-07_16_10.png" alt="DIGIY BUSINESS image 14" loading="lazy" decoding="async">
+  </div>
+  <div class="slide">
+    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-25-mai-2026-01_35_26.png" alt="DIGIY BUSINESS image 15" loading="lazy" decoding="async">
+  </div>
+  <div class="slide">
+    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-25-mai-2026-01_25_44-1.png" alt="DIGIY BUSINESS image 16" loading="lazy" decoding="async">
+  </div>
+  <div class="slide">
+    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-14-mai-2026-04_01_44.png" alt="DIGIY BUSINESS image 17" loading="lazy" decoding="async">
+  </div>
+  <div class="slide">
+    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/DIGIY-COMMERCE.png" alt="DIGIY Commerce image 18" loading="lazy" decoding="async">
+  </div>
+  <div class="slide">
+    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-A.png" alt="Astou Boutique DIGIY image 19" loading="lazy" decoding="async">
+  </div>
+  <div class="slide">
+    <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-D.png" alt="Astou Boutique DIGIY image 20" loading="lazy" decoding="async">
+  </div>
+  <div class="slide">
+    <img src="https://digiylyfe.net/wp-content/uploads/2026/04/ChatGPT-Image-30-avr.-2026-21_27_04.png" alt="DIGIY BUSINESS image 21" loading="lazy" decoding="async">
+  </div>
+  <div class="slide">
+    <img src="https://digiylyfe.net/wp-content/uploads/2026/02/102.webp" alt="DIGIY BUSINESS image 22" loading="lazy" decoding="async">
+  </div>
+  <div class="slide">
+    <img src="https://digiylyfe.net/wp-content/uploads/2026/02/114-REVUE.webp" alt="Revue DIGIY image 23" loading="lazy" decoding="async">
+  </div>
+  <div class="slide">
+    <img src="https://digiylyfe.net/wp-content/uploads/2025/09/149-REVUE.png" alt="Revue DIGIY image 24" loading="lazy" decoding="async">
+  </div>
+  <div class="slide">
+    <img src="https://digiylyfe.net/wp-content/uploads/2025/09/126-revue.png" alt="Revue DIGIY image 25" loading="lazy" decoding="async">
+  </div>
+  <div class="slide">
+    <img src="https://digiylyfe.net/wp-content/uploads/2025/09/IMG_5222.png" alt="DIGIY BUSINESS image 26" loading="lazy" decoding="async">
+  </div>
+  <div class="slide">
+    <img src="https://digiylyfe.net/wp-content/uploads/2025/09/152-REVUE.png" alt="Revue DIGIY image 27" loading="lazy" decoding="async">
+  </div>
+  <div class="slide">
+    <img src="https://digiylyfe.net/wp-content/uploads/2025/09/118-REVUE.png" alt="Revue DIGIY image 28" loading="lazy" decoding="async">
+  </div>
   <button class="arrow prev" id="bp" aria-label="Image précédente">‹</button>
   <button class="arrow next" id="bn" aria-label="Image suivante">›</button>
 </section>
 
-<div class="status-pill" id="st">Vision DIGIYLYFE · prêt à écouter</div>
+<div class="status-pill" id="st">DIGIY BUSINESS · prêt à écouter</div>
 
 <div class="fab-wrap" id="fabWrap">
   <div class="fab-panel" id="fabPanel">
@@ -340,8 +399,9 @@ body::before{
 </div>
 
 <div class="hidden-text" aria-hidden="true">
-  <h1>Vision DIGIYLYFE</h1>
-  <p>Uber veut garder le client dans son application. DIGIY veut l'amener chez le professionnel.</p>
+  <h1>DIGIY BUSINESS</h1>
+  <p>L’accélérateur des pistes du village. Travailler avec les nouveaux outils du business indépendant.</p>
+  <p>Le téléphone devient ta pioche. La fiche devient ta vitrine. Le QR devient ta porte. Wave devient ton argent. Le réseau devient ta force.</p>
 </div>
 
 <script>
@@ -355,9 +415,28 @@ const IMAGE_URLS = [
   "https://digiylyfe.net/wp-content/uploads/2025/08/Image-28-08-2025-a-13.23.jpeg",
   "https://digiylyfe.net/wp-content/uploads/2026/04/image_9411f70d.png",
   "https://digiylyfe.net/wp-content/uploads/2025/09/121-REVUE.png",
-  "https://digiylyfe.net/wp-content/uploads/2025/09/125-REVUE.png"
+  "https://digiylyfe.net/wp-content/uploads/2025/09/125-REVUE.png",
+  "https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-26-mai-2026-07_50_59.png",
+  "https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-26-mai-2026-07_42_39.png",
+  "https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-26-mai-2026-07_21_44.png",
+  "https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-26-mai-2026-07_07_28.png",
+  "https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-26-mai-2026-07_16_10.png",
+  "https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-25-mai-2026-01_35_26.png",
+  "https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-25-mai-2026-01_25_44-1.png",
+  "https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-14-mai-2026-04_01_44.png",
+  "https://digiylyfe.net/wp-content/uploads/2026/05/DIGIY-COMMERCE.png",
+  "https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-A.png",
+  "https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-D.png",
+  "https://digiylyfe.net/wp-content/uploads/2026/04/ChatGPT-Image-30-avr.-2026-21_27_04.png",
+  "https://digiylyfe.net/wp-content/uploads/2026/02/102.webp",
+  "https://digiylyfe.net/wp-content/uploads/2026/02/114-REVUE.webp",
+  "https://digiylyfe.net/wp-content/uploads/2025/09/149-REVUE.png",
+  "https://digiylyfe.net/wp-content/uploads/2025/09/126-revue.png",
+  "https://digiylyfe.net/wp-content/uploads/2025/09/IMG_5222.png",
+  "https://digiylyfe.net/wp-content/uploads/2025/09/152-REVUE.png",
+  "https://digiylyfe.net/wp-content/uploads/2025/09/118-REVUE.png"
 ];
-const TEXT = "Uber avance maintenant vers les réservations d'hôtel. Après les trajets. Après les repas. Voici le voyage. Le monde va vers des écosystèmes. Mais une question devient centrale : qui possède la relation avec le client ? Uber veut que le client reste dans Uber. DIGIYLYFE veut que le client arrive chez le professionnel. Ce sont deux philosophies opposées. Dans une super-app de plateforme, le pro devient une ressource dans une grande machine. Dans un super-écosystème local, le pro garde son nom, son lien, son QR, son client, et son argent. DIGIYLYFE, c'est zéro commission, paiement direct, présence digitale simple, outils métier, et visibilité locale. DIGIY ne remplace pas le professionnel. DIGIY l'équipe. Le futur peut capturer le terrain. Ou aider le terrain à reprendre la main. DIGIYLYFE choisit le deuxième chemin. Ancré en Afrique. Ouvert au monde.";
+const TEXT = "DIGIY BUSINESS. L'accélérateur des pistes du village. Travailler avec les nouveaux outils du business indépendant. Téléphone. Q R. Wave. WhatsApp. I A. Réseau. PAY. Voix. Fiche digitale. DIGIY BUSINESS n'est pas une école classique. Ce n'est pas un cours froid. Ce n'est pas une théorie d'autoroute. C'est un programme vivant pour apprendre à travailler avec les nouveaux outils du terrain. On vient avec son téléphone. On repart avec son business en main. Le téléphone devient ta pioche. La fiche devient ta vitrine. Le Q R devient ta porte. Wave devient ton argent. Le réseau devient ta force. Ta pioche ne pèse que quelques grammes, mais elle peut contenir le monde. DIGIY BUSINESS prend des personnes du terrain avec un téléphone, et leur apprend à devenir visibles, organisées, joignables, payables, fières, autonomes, et capables de faire grandir leur activité. La destination n'est pas de faire des élèves. La destination, c'est de révéler des bâtisseurs indépendants du terrain. DIGIY BUSINESS ne forme pas seulement. Il déclenche, accompagne, équipe et relie. DIGIY BUSINESS n'est pas l'école du goudron des autoroutes. C'est l'école des pistes du village. Sur les grands axes, tout paraît moderne. Mais dès qu'on entre dans un quartier, le sable revient sous les semelles. DIGIY part de cette réalité. Pas depuis un bureau climatisé. Pas depuis des modèles importés. Pas depuis des discours éloignés du peuple. DIGIY part du téléphone dans la main, du client sur WhatsApp, de l'argent sur Wave, du Q R imprimé, de la fiche partagée, de la boutique ouverte, du chauffeur disponible, de l'artisan en mouvement, de la famille qui relaie, du réseau humain qui fait circuler la confiance. DIGIY apprend à avancer là où la route change. DIGIY BUSINESS ne force pas un même rythme pour tout le monde. Le terrain n'avance pas avec un chronomètre unique. Certains comprennent vite. D'autres ont besoin d'être rassurés. D'autres doivent répéter, tester, parler, voir, toucher, partager, recommencer. Le programme s'adapte au métier, à la ville, à la personne, au niveau, au téléphone, à la langue, au rythme du terrain. L'objectif reste clair : déclencher l'étincelle, installer la flamme, créer des habitudes, faire grandir l'activité, et relier chaque pro à la force du réseau. Avant de séparer les métiers, tout le monde apprend les bases du business indépendant. Mon nom. Mon métier. Ma fiche. Mon Q R. Mon WhatsApp. Mon paiement. Mon message client. Mon premier suivi PAY. Ma première annonce. Ma première preuve de visibilité. Ce socle crée une culture commune. Ensuite seulement, chaque métier entre dans son atelier. DRIVER apprend ses courses. MARKET apprend ses produits. BUILD apprend ses devis. LOC apprend ses réservations. PAY apprend l'argent. RÉSEAU apprend la visibilité. VOIX apprend à parler, copier, envoyer, écouter. DIGIY BUSINESS accueille des profils différents : chauffeurs, boutiques, artisans, restaurants, loueurs, services, jeunes, femmes commerçantes, professionnels qualifiés. Cette mixité est une richesse. Des métiers différents. Une même piste. Un même village digital. Ce que DIGIY BUSINESS enseigne, ce sont les gestes simples qui changent la vie d'un pro : être visible, présenter son activité, parler clairement au client, envoyer un message propre, partager sa fiche, faire circuler son Q R, recevoir un paiement, garder une preuve, suivre ses recettes, noter ses dépenses, comprendre recette et bénéfice, acompte et solde, dette et paiement reçu. Ce n'est pas seulement du digital. C'est de l'éducation économique du terrain. DIGIY BUSINESS est le Y C du terrain, mais à la sénégalaise. Y C accélère les startups. DIGIY accélère les pros du terrain. Pas pour lever des fonds d'abord, mais pour devenir visible, joignable, payable, organisé, crédible et autonome. Chaque groupe devient aussi un laboratoire vivant. Le terrain parle. DIGIY écoute. Les modules évoluent. Les meilleurs participants peuvent devenir ambassadeurs : pas influenceurs, pas blabla, mais relais de confiance. Le réseau humain porte le réseau digital. DIGIY BUSINESS peut se déplacer dans une boutique, chez un partenaire, dans une salle simple, dans un restaurant, dans un quartier, sur iPad, sur téléphone, avec Q R et WhatsApp. L'iPad fait comprendre. Le téléphone fait travailler. À la fin d'un parcours, le participant ne reçoit pas seulement un papier. Il reçoit une preuve qui travaille : fiche DIGIY active, Q R actif, message client prêt, première annonce, premier suivi PAY, mini profil pro, badge Pro DIGIY formé. Pas un diplôme qui dort dans un tiroir. Une présence visible, utile, partageable. Tout ce qui sort de DIGIY BUSINESS nourrit DIGIY MÉMOIRE : phrases fortes, erreurs à ne plus refaire, habitudes terrain, mots en langues locales, modèles de messages, parcours métier, témoignages, doctrines. Une œuvre sans mémoire peut se diluer. Une œuvre qui garde sa mémoire devient une culture. DIGIYLYFE construit les outils. DIGIY BUSINESS forme les humains. DIGIY MÉMOIRE protège l'esprit. DIGIY RÉSEAU fait circuler la confiance. DIGIY STORE équipe le pro. Là, DIGIYLYFE n'est plus seulement une Supa-Apps. C'est un écosystème complet : outil, formation, culture, réseau, mémoire, transmission. DIGIY BUSINESS ne forme pas des élèves. Il révèle des bâtisseurs indépendants du terrain. Pas l'autoroute froide. La piste vivante. Celle où le sable colle aux semelles, mais où le village avance quand même.";
 
 IMAGE_URLS.forEach(src => { const i = new Image(); i.src = src; });
 document.querySelectorAll('.slide').forEach(slide => {
@@ -506,7 +585,7 @@ function digiyStop(){
   setProgress(0);
   paused=false;
   setElText('fabPauseBtn','⏸');
-  setStatus('Vision DIGIYLYFE · prêt à écouter');
+  setStatus('DIGIY BUSINESS · prêt à écouter');
   setFabState('stop');
 }
 
@@ -565,4 +644,6 @@ if(window.speechSynthesis){
 </html>
 
 >
+
+
 
