@@ -112,7 +112,7 @@ body::before{
   .arrow.prev{left:7px}.arrow.next{right:7px}
 }
 
-.fab-wrap{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:90;display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+.fab-wrap{position:fixed;left:16px;right:auto;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:90;display:flex;flex-direction:column;align-items:flex-start;gap:10px;}
 .fab-panel{
   max-width:min(92vw,520px);display:flex;align-items:center;gap:9px;flex-wrap:wrap;
   padding:10px;border-radius:18px;border:1px solid rgba(212,175,55,.30);
@@ -160,20 +160,20 @@ body::before{
   opacity:.78;transition:background .5s linear;
 }
 .status-pill{
-  position:fixed;left:14px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:85;
+  position:fixed;right:14px;left:auto;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:85;
   max-width:calc(100vw - 116px);padding:8px 11px;border-radius:999px;
   border:1px solid rgba(212,175,55,.22);background:rgba(6,14,7,.58);
   color:rgba(237,232,223,.76);font-size:.72rem;font-weight:700;letter-spacing:.02em;
   backdrop-filter:blur(10px);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
 }
 @media(max-width:480px){
-  .fab-wrap{right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+  .fab-wrap{left:12px;right:auto;bottom:calc(12px + env(safe-area-inset-bottom,0px))}
   .fab-main{width:70px;height:70px;font-size:1.28rem}
   .fab-main-label{font-size:.58rem;top:-10px}
   .fab-panel{max-width:calc(100vw - 24px);gap:7px;padding:9px}
   .fab-mini-btn{width:38px;height:38px;border-radius:12px}
   .fab-spd{font-size:.70rem;padding:6px 8px}
-  .status-pill{left:10px;bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:calc(100vw - 104px);font-size:.68rem}
+  .status-pill{right:10px;left:auto;bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:calc(100vw - 104px);font-size:.68rem;text-align:right}
 }
 .hidden-text{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important;}
 </style>
@@ -573,6 +573,13 @@ if(window.speechSynthesis){
 <script src="https://pro-action-digiy.digiylyfe.com/assets/js/digiy-retour-voix.js?v=retour-voix-20260606-v4" defer></script>
 </body>
 </html>
+
+
+>
+
+
+
+
 
 
 >
