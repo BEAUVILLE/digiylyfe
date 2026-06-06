@@ -225,10 +225,9 @@ body::before{
     <button class="fab-mini-btn fab-mini-pause" id="fabPauseBtn" onclick="digiyPause()" title="Pause">⏸</button>
     <button class="fab-mini-btn fab-mini-stop" onclick="digiyStop();closeFab()" title="Stop">⏹</button>
     <div class="fab-speeds">
-      <button class="fab-spd" onclick="setRate(0.75,this)">0.75×</button>
-      <button class="fab-spd on" onclick="setRate(0.86,this)">1×</button>
-      <button class="fab-spd" onclick="setRate(1.1,this)">1.1×</button>
-      <button class="fab-spd" onclick="setRate(1.25,this)">1.25×</button>
+      <button class="fab-spd" onclick="setRate(0.74,this)">Doux</button>
+      <button class="fab-spd on" onclick="setRate(0.82,this)">Normal</button>
+      <button class="fab-spd" onclick="setRate(0.96,this)">Vif</button>
     </div>
   </div>
   <button class="fab-main" id="fabMain" onclick="toggleFab()" title="Écoute DIGIY">
@@ -393,14 +392,42 @@ function hideCaption(){
   captionEl.classList.remove('visible');
 }
 
-// ─── MOTEUR AUDIO SYNCHRONISÉ ─────────────────────────────────────────────────
-// Stratégie : on joue chaque bloc via une SpeechSynthesisUtterance séparée.
-// onend du bloc N → slide N+1 + lecture bloc N+1.
-// C'est la méthode la plus fiable cross-browser (boundary events peu fiables sur mobile).
+// ─── MOTEUR AUDIO DIGIY — voix plus posée, moins mécanique ────────────────
+// Le lecteur reste synchronisé aux images, mais la voix est réglée comme les autres audios DIGIY :
+// rythme doux, meilleure sélection de voix française, respiration entre les blocs, prononciation protégée.
 
-let rate=0.86, paused=false, pInt=null, fabOpen=false;
+let rate=0.82, paused=false, pInt=null, fabOpen=false;
 let digiyWakeLock=null;
-let blocIndex=0, uttCurrent=null, isPlaying=false;
+let blocIndex=0, uttCurrent=null, isPlaying=false, playRunId=0;
+
+function getDigiyFrenchVoice(){
+  const voices=(window.speechSynthesis&&window.speechSynthesis.getVoices?window.speechSynthesis.getVoices():[])||[];
+  const fr=voices.filter(v=>/^fr/i.test(v.lang||''));
+  const preferred=[
+    /google.*fran/i,
+    /microsoft.*(denise|henri|paul|hortense|fran)/i,
+    /thomas/i,
+    /audrey/i,
+    /aur[ée]lie/i,
+    /amelie/i,
+    /french/i,
+    /fran/i
+  ];
+  for(const rule of preferred){
+    const found=fr.find(v=>rule.test(v.name||''));
+    if(found) return found;
+  }
+  return fr[0]||voices.find(v=>/^fr/i.test(v.lang||''))||null;
+}
+
+function prepareAudioText(text){
+  return phoneticize(String(text||''))
+    .replace(/\bY\s*C\b/gi,"l'accélérateur du terrain")
+    .replace(/\bstartups\b/gi,"jeunes entreprises")
+    .replace(/\bSupa-Apps\b/gi,"super applications")
+    .replace(/\s+/g,' ')
+    .trim();
+}
 
 async function digiyKeepScreenAwake(){
   try{
@@ -418,85 +445,124 @@ document.addEventListener('visibilitychange',()=>{
   if(document.visibilityState==='visible'&&isPlaying&&!paused) digiyKeepScreenAwake();
 });
 
-function speakBloc(index){
+function estimateBlocMs(text){
+  const words=(String(text||'').match(/\S+/g)||[]).length;
+  return Math.max(2400,(words*560)/Math.max(rate,.62));
+}
+
+function speakBloc(index,runId){
+  if(runId!==playRunId) return;
   if(index>=BLOCS.length){
-    // fin
     digiyReleaseWakeLock();
-    setStatus('✓ Vision terminée');
+    setStatus('✓ Audio terminé');
     setProgress(100);clearInterval(pInt);
     paused=false;isPlaying=false;syncMode=false;
+    setElText('fabPauseBtn','⏸');
     setFabState('stop');hideCaption();
     startLoop();
     return;
   }
-  blocIndex=index;
-  const text=BLOCS[index];
-  goTo(index,true);
-  showCaption(text);
-  updateCounter();
-  // progress bar bloc
-  bar.style.transition='none';bar.style.width='0%';
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{
-    // on estime la durée du bloc proportionnellement au total
-    const totalChars=BLOCS.reduce((a,b)=>a+b.length,0);
-    const blocDur=(text.length/totalChars)*(totalChars/(rate*14))*1000;
-    bar.style.transition='width '+blocDur+'ms linear';
-    bar.style.width='100%';
-  }));
 
-  const u=new SpeechSynthesisUtterance(phoneticize(text));
-  u.lang='fr-FR';u.rate=rate;u.pitch=1;u.volume=1;
-  const voices=window.speechSynthesis.getVoices();
-  const frV=voices.find(v=>v.lang&&v.lang.toLowerCase().startsWith('fr'));
-  if(frV) u.voice=frV;
+  blocIndex=index;
+  const visibleText=BLOCS[index];
+  const spokenText=prepareAudioText(visibleText);
+  goTo(index,true);
+  showCaption(visibleText);
+  updateCounter();
+
+  if(bar){
+    bar.style.transition='none';bar.style.width='0%';
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      bar.style.transition='width '+estimateBlocMs(spokenText)+'ms linear';
+      bar.style.width='100%';
+    }));
+  }
+
+  const u=new SpeechSynthesisUtterance(spokenText);
+  u.lang='fr-FR';
+  u.rate=rate;
+  u.pitch=1.03;
+  u.volume=1;
+  const voice=getDigiyFrenchVoice();
+  if(voice) u.voice=voice;
   uttCurrent=u;
-  u.onend=()=>{
-    if(!isPlaying) return;
-    speakBloc(index+1);
+
+  u.onstart=()=>{
+    if(runId!==playRunId) return;
+    setStatus('🎧 Audio DIGIY en cours…');
+    setFabState('play');
   };
+
+  u.onend=()=>{
+    if(runId!==playRunId||!isPlaying) return;
+    window.setTimeout(()=>speakBloc(index+1,runId),260);
+  };
+
   u.onerror=(e)=>{
-    if(e.error==='interrupted'||e.error==='canceled'||!isPlaying) return;
+    if(e.error==='interrupted'||e.error==='canceled'||runId!==playRunId||!isPlaying) return;
     digiyReleaseWakeLock();
-    setStatus('⚠️ Erreur audio. Relance ÉCOUTE.');
+    setStatus('⚠️ Audio interrompu. Relance ÉCOUTE.');
     setFabState('stop');isPlaying=false;syncMode=false;hideCaption();startLoop();
   };
-  window.speechSynthesis.speak(u);
+
+  try{window.speechSynthesis.speak(u);}catch(_){
+    setStatus('⚠️ Audio non disponible sur ce navigateur.');
+    setFabState('stop');isPlaying=false;syncMode=false;hideCaption();startLoop();
+  }
 }
 
-function digiyPlay(){
-  if(!('speechSynthesis' in window)){setStatus('⚠️ Audio non disponible.');return;}
+function launchAudioFromStart(){
+  playRunId+=1;
+  const runId=playRunId;
   isPlaying=true;syncMode=true;
   window.speechSynthesis.cancel();
   clearInterval(pInt);
   paused=false;
   stopLoop();
   digiyKeepScreenAwake();
+  setElText('fabPauseBtn','⏸');
   setFabState('play');
-  setStatus('▶ Lecture synchronisée…');
+  setStatus('🎧 Préparation audio DIGIY…');
   startGlobalProg();
-  speakBloc(0);
+  speakBloc(0,runId);
+}
+
+function digiyPlay(){
+  if(!('speechSynthesis' in window)||!('SpeechSynthesisUtterance' in window)){setStatus('⚠️ Audio non disponible.');return;}
+  const voices=window.speechSynthesis.getVoices();
+  if(voices&&voices.length){launchAudioFromStart();return;}
+  let started=false;
+  function startOnce(){
+    if(started) return;
+    started=true;
+    try{window.speechSynthesis.removeEventListener('voiceschanged',startOnce);}catch(_){ }
+    launchAudioFromStart();
+  }
+  try{window.speechSynthesis.addEventListener('voiceschanged',startOnce);}catch(_){ }
+  setTimeout(startOnce,700);
 }
 
 function digiyPause(){
-  if(!('speechSynthesis' in window)) return;
+  if(!('speechSynthesis' in window)||!isPlaying) return;
   if(paused){
     window.speechSynthesis.resume();
     paused=false;
     digiyKeepScreenAwake();
-    setStatus('▶ Reprise…');
+    setStatus('▶ Reprise audio DIGIY…');
     setElText('fabPauseBtn','⏸');
     setFabState('play');
   }else{
     window.speechSynthesis.pause();
     paused=true;
     digiyReleaseWakeLock();
-    setStatus('⏸ Vision en pause');
+    setStatus('⏸ Audio en pause');
     setElText('fabPauseBtn','▶');
     setFabState('pause');
   }
 }
 
 function digiyStop(){
+  playRunId+=1;
   if('speechSynthesis' in window) window.speechSynthesis.cancel();
   digiyReleaseWakeLock();
   clearInterval(pInt);
@@ -514,20 +580,20 @@ function setRate(r,el){
   document.querySelectorAll('.fab-spd').forEach(b=>b.classList.remove('on'));
   if(el) el.classList.add('on');
   if(isPlaying&&!paused){
-    // relance propre depuis le bloc courant sans déclencher un double onend
     const resumeIndex=blocIndex;
-    isPlaying=false;
+    playRunId+=1;
+    const runId=playRunId;
     window.speechSynthesis.cancel();
     clearInterval(pInt);
     setTimeout(()=>{
-      isPlaying=true;
+      if(!isPlaying) return;
       syncMode=true;
       stopLoop();
-      setStatus('▶ Lecture synchronisée…');
+      setStatus('🎧 Audio DIGIY en cours…');
       setFabState('play');
       startGlobalProg();
-      speakBloc(resumeIndex);
-    },120);
+      speakBloc(resumeIndex,runId);
+    },160);
   }
 }
 
@@ -535,13 +601,13 @@ function setProgress(p){
   const circ=document.getElementById('fabProgCircle');
   if(circ) circ.style.background=`conic-gradient(var(--gold) ${p*3.6}deg,transparent 0deg)`;
 }
-// progress global estimé
 function startGlobalProg(){
   clearInterval(pInt);
-  const totalChars=BLOCS.reduce((a,b)=>a+b.length,0);
-  const totalMs=(totalChars/(rate*14))*1000;
+  const totalWords=BLOCS.join(' ').match(/\S+/g)?.length||900;
+  const totalMs=Math.max(20000,(totalWords*560)/Math.max(rate,.62));
   const t0=Date.now();
   pInt=setInterval(()=>{
+    if(paused) return;
     const p=Math.min(((Date.now()-t0)/totalMs)*100,99);
     setProgress(p);
   },800);
@@ -573,6 +639,12 @@ if(window.speechSynthesis){
 <script src="https://pro-action-digiy.digiylyfe.com/assets/js/digiy-retour-voix.js?v=retour-voix-20260606-v4" defer></script>
 </body>
 </html>
+
+
+>
+
+
+
 
 
 >
